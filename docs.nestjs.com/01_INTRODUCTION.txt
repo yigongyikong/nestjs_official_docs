@@ -1,0 +1,137 @@
+=====================================================================
+https://docs.nestjs.com/
+=====================================================================
+[Introduction]
+- Nest (NestJS) is a framework for building efficient, 
+    scalable Node.js server-side applications. 
+= Nest는 efficient하고, scalable한 Node.js server-side applications를
+    building하기 위한 framework이다.
+- It uses progressive JavaScript, 
+    is built with and fully supports TypeScript 
+    (yet still enables developers to code in pure JavaScript) 
+    and combines elements of OOP (Object Oriented Programming), 
+    FP (Functional Programming), 
+    and FRP (Functional Reactive Programming).
+= Nest(It)은 progressive(진보적으로) JavaScript를 사용하고,
+    TypeScript(아직도 여진히 개발자들이 pure JavaScript로 코딩할 수 있다)로 
+    built 되고 fully supports해서 OOP(Object Oriented), 
+    FP(Functional Programming), FRP(Functional Reactive Programming) 
+    요소들과 결합한다.
+    !OOP : 데이터와 코드를 포함할 수 있는 "객체" 개념을 기반으로 하는 프로그래밍 방식!
+        !https://en.wikipedia.org/wiki/Object-oriented_programming!
+    !FP : 함수를 작성하고, 작성한 함수를 실행시켜 프로그램을 동작시키는 방식!
+        !https://en.wikipedia.org/wiki/Functional_programming!
+    !FRP : 비동기 데이터를 다루는 RP를 사용하여 FP 방식으로 프로그램을 동작시키는 방식!
+        !https://en.wikipedia.org/wiki/Functional_reactive_programming!
+- Under the hood, Nest makes use of robust HTTP Server frameworks 
+    like Express (the default) 
+    and optionally can be configured to use Fastify as well!
+= 내부적으로, Nest는 (기본값으로) Express 같은 robust(견고한) 
+    HTTP Server frameworks을 만드는 데 사용하고,
+    optionally Fastify 역시 설정하도록 구성할 수 있다.
+- Nest provides a level of abstraction 
+    above these common Node.js frameworks (Express/Fastify), 
+    but also exposes their APIs directly to the developer. 
+= Nest는 these common Node.js frameworks (Express/Fastify) 이상의
+    abstraction 레벨을 제공하지만, 개발자에게 APIs를 directly 노출한다.
+- This gives developers the freedom to use the myriad 
+    of third-party modules which are available 
+    for the underlying platform.
+= APIs 노출(This)을 통해 개발자는 underlying(기본) platform에서 available한
+    myriad(무수한) third-party modules을 자유롭게 사용할 수 있는 환경을 제공한다.
+=====================================================================
+[Philosophy]
+- In recent years, thanks to Node.js, 
+    JavaScript has become the “lingua franca” of the web 
+    for both front and backend applications. 
+= 최근 몇 년 동안, Node.js 덕분에, 
+    JavaScript는 front and backend applications 모두에서 
+    web상 "lingua franca(공통어)"가 되었다.
+    !lingua franca : 여러 방면에서 쓰이는 언어로 Reactive concurrency한 특성을
+        가지며 주류 언어로 쓰이는 언어(현재 C, C++, Python, TypeScript, Rust 등)
+        !https://www.lf-lang.org/!
+- This has given rise to awesome projects 
+    like Angular, React and Vue, which improve developer productivity 
+    and enable the creation of fast, testable, 
+    and extensible frontend applications. 
+= JavaScript 사용성(This)으로 개발자 productivity을 improve하고
+    fast하고 testable하고 extensible frontend application을 생성할 수 있는
+    Angular, React, Vue 같은 awesome projects가 등장했다.
+- However, while plenty of superb libraries, helpers, 
+    and tools exist for Node (and server-side JavaScript), 
+    none of them effectively solve the main problem of - Architecture.
+= 그러나, Node(server-side JavaScript)를 위해 superb(우수한) libraries,
+    helpers 그리고 tools가 많이 존재하지만, 그것들 중 어느것도 Architecture라는
+    main problem을 해결하지 못했다.
+- Nest provides an out-of-the-box application architecture 
+    which allows developers and teams to create highly testable, 
+    scalable, loosely coupled, and easily maintainable applications. 
+= Nest는 개발자와 그 팀이 testable, scalable, loosely coupled,
+    그리고 easily maintainable한 applications을 
+    out_of_the_box(즉시 사용 가능)한 application architecture를 제공한다.
+        !https://en.wikipedia.org/wiki/Out_of_the_box_(feature)!
+- The architecture is heavily inspired by Angular.
+= 해당 architecture는 Angular에 heavily inspired 되었다.
+=====================================================================
+[Installation]
+- To get started, 
+    you can either scaffold the project with the Nest CLI, 
+    or clone a starter project (both will produce the same outcome).
+= 시작하기 위해서, Nest CLI를 사용해 project를 scaffold하거나
+    starter project를 clone할 수 있다. (둘다 동일한 결과를 생성한다.)
+- To scaffold the project with the Nest CLI, 
+    run the following commands. 
+    !scaffold : Code generation, Project generation!
+        !https://en.wikipedia.org/wiki/Scaffold_(programming)!
+= Nest CLI로 scaffold 프로젝트를 만들기 위해서, 아래 명령어-ex)를 사용하면 됩니다.
+- This will create a new project directory, 
+    and populate the directory with the initial core Nest files 
+    and supporting modules, creating a conventional base structure 
+    for your project. 
+= 명령어를 사용하면(This) new project directory가 생성될 것이고,
+    initial core Nest files과 supporting modules로 directory를
+    populate(채워서) project에 conventional base structure을 생성한다.
+- Creating a new project with the Nest CLI is recommended 
+    for first-time users.
+= first-time users에게 Nest CLI로 새로운 projecct를 생성할 것을 추천한다.
+- We'll continue with this approach in First Steps.
+= First Steps에 이러한 approach로 진행할 것이다.
+ex) - $ npm i -g @nestjs/cli
+    - $ nest new project-name
+- HINT
+    To create a new TypeScript project with stricter feature set, 
+    pass the --strict flag to the nest new command.
+= 힌트
+    stricter(더 엄격한) feature set로 새로운 TypeScript project를 만드려면,
+    --strict flag를 nest new 명령어에 전달하면 된다.
+=====================================================================
+[Alternatives]
+- Alternatively, to install the TypeScript starter project with Git:
+= 대안으로, TypeScript starter project를 Git을 통해 아래 ex)를 실행한다.:
+ex) - $ git clone https://github.com/nestjs/typescript-starter.git project
+    - $ cd project
+    - $ npm install
+    - $ npm run start
+- HINT
+    If you'd like to clone the repository without the git history, 
+    you can use degit.
+= 힌트
+    git history 없이 repository를 clone하고 싶다면, degit을 사용하면 된다.
+- Open your browser and navigate to http://localhost:3000/.
+= browser를 열고 http://localhost:3000/로 이동한다.
+- To install the JavaScript flavor of the starter project, 
+    use javascript-starter.git in the command sequence above.
+= starter project의 JavaScript를 설치하려면,
+    javascript-starter.git을 위 command sequence에서 사용해라.
+- You can also manually create a new project from scratch 
+    by installing the core and supporting files with npm (or yarn). 
+= npm(or yarn) 으로 core와 supporting files을 installing 해서
+    scratch(처음)부터 new project를 manually(수동으로) 생성할 수 있다.
+- In this case, of course, you'll be responsible 
+    for creating the project boilerplate files yourself.
+= 물론, 이러한 경우에, project boilerplate(상용구) files을 직접
+    생성할 책임이 있다.
+    !boilerplate : 여러 곳에서 재사용되며, 반복적으로 비슷한 형태를 띄는 코드!
+        !https://en.wikipedia.org/wiki/Boilerplate_code!
+ex) - $ npm i --save @nestjs/core @nestjs/common rxjs reflect-metadata
+=====================================================================
