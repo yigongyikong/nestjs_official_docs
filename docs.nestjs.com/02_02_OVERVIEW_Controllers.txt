@@ -1,0 +1,194 @@
+=====================================================================
+https://docs.nestjs.com/controllers
+=====================================================================
+[Controllers]
+- Controllers are responsible for 
+    handling incoming requests and returning responses to the client.
+= Controllers는 incoming requests를 handling하고 
+    clinet에 responses를 returning하는 역할을 한다.
+- A controller's purpose is to receive specific requests 
+    for the application.
+= controller's purpose는 application에 specific requests을 receive한다.
+- The routing mechanism controls which controller receives 
+    which requests.
+= routing mechanism은 which controller가 which requests를
+    receives하는 지를 controls한다.
+- Frequently, each controller has more than one route, 
+    and different routes can perform different actions.
+= 종종, each controller는 1개 이상의 route가 있고,
+    different routes는 different actions을 수행할 수 있다.
+- In order to create a basic controller, 
+    we use classes and decorators.
+= basic controller를 create하기 위해서, classes와 decorators를 사용한다.
+- Decorators associate classes with required metadata 
+    and enable Nest to create a routing map 
+    (tie requests to the corresponding controllers).
+= Decorators는 classes를 required metadata와 associate(연결)하고
+    Nest가 routing map을 create할 수 있게 한다.
+    (requests에 corresponding(해당)하는 controllers에 tie(연결))
+- HINT
+    For quickly creating a CRUD controller 
+        with the validation built-in, 
+        you may use the CLI's CRUD generator: 
+        nest g resource [name].
+= 힌트
+    validation이 built-in된 CRUD controller를 quickly creating하려면,
+    CLI's CRUD generator를 사용하면 된다.
+    $ nest g resource [name]
+=====================================================================
+[Routing]
+- In the following example we'll use the @Controller() decorator, 
+    which is required to define a basic controller. 
+= following example에서 basic controller를 define하는데 required되는
+    @Controller() decorator를 사용한다.
+- We'll specify an optional route path prefix of cats. 
+= optional route path를 'cats'라는 prefix를 지정할 것이다.
+- Using a path prefix in a @Controller() decorator allows us 
+    to easily group a set of related routes, 
+    and minimize repetitive code. 
+= @Controller decorator에 prefix path를 사용하면 related routes set을
+    easily group화하고 repetitive code를 minimize할 수 있다.
+- For example, we may choose to group a set of routes 
+    that manage interactions with a cat entity under the route /cats. 
+= 예를 들어, "/cats" route 아래 cat entity와 interactions을 관리하는
+    a set of routes로 group하도록 선택할 수 있다.
+- In that case, 
+    we could specify the path prefix cats 
+    in the @Controller() decorator so that we don't have to repeat 
+    that portion of the path for each route in the file.
+= 이 경우에, file에 each route에 대한 path의 portion을 repeat할 필요가 없게
+    @Controller() decorator에 'cats' prefix path를 specify할 수 있다.
+- ex) cats.controller.ts
+- HINT
+    To create a controller using the CLI, 
+    simply execute the $ nest g controller [name] command.
+= 힌트
+    CLI를 사용해서 controller를 create하기 위해서, simply
+    "$ nest g controller [name]"를 실행하면 된다.
+- The @Get() HTTP request method decorator 
+    before the findAll() method tells Nest to create a handler 
+    for a specific endpoint for HTTP requests.
+= findAll() method 앞에 @Get() HTTP request method decorator는
+    Nest에게 specific endpoint에 대한 HTTP requests용 handler를 생성하게 한다.
+- The endpoint corresponds to the HTTP request method 
+    (GET in this case) and the route path. 
+= endpoint는 HTTP requests method(이 경우 GET)과 route path에 
+    corresponds(해당)한다.
+- What is the route path? 
+= route path는 무엇인가?
+- The route path for a handler is determined by concatenating 
+    the (optional) prefix declared for the controller, 
+    and any path specified in the method's decorator. 
+= handler의 route path는 controller에 대해 declared된 (optional)한 prefix와
+    method의 decorator에 specified any path로 concatenating(연결)하여
+    determined된다.
+- Since we've declared a prefix for every route (cats), 
+    and haven't added any path information in the decorator, 
+    Nest will map GET /cats requests to this handler. 
+= every route(cats)에 대해 prefix를 declared되었고 decorator에 any path를
+    added하지 않았기 때문에, Nest는 "GET /cats" requests를 handler에
+    map 할 것이다.
+- As mentioned, 
+    the path includes both the optional controller path prefix 
+    and any path string declared in the request method decorator. 
+= mentioned한 것 처럼, path는 optional controller path prefix와
+    request method decorator에 declared된 any path string이 모두 포함된다.
+- For example, 
+    a path prefix of cats combined with the decorator @Get('breed') 
+    would produce a route mapping for requests like GET /cats/breed.
+= 예를 들어, @Get('breed') decorator와 결합된 'cats' path prefix는
+    'GET /cats/breed' 같은 requests에 route mapping을 produce합니다.
+- In our example above, when a GET request is made to this endpoint, 
+    Nest routes the request to our user-defined findAll() method. 
+= example above에서, this endpoint에 GET request이 made될 때,
+    Nest는 request를 user-defined findAll() method로 routes한다.
+- Note that the method name we choose here is completely arbitrary. 
+= here에 choose한 method name은 completely arbitrary(임의)적이다.
+- We obviously must declare a method to bind the route to, 
+    but Nest doesn't attach any significance to the method name chosen.
+= obviously(분명히) route를 bind할 method를 declare해야 하지만,
+    Nest는 chosen method name에 any significance(의미)도
+    attach(부여)하지 않는다.
+- This method will return a 200 status code 
+    and the associated response, which in this case is just a string. 
+= This method는 200 status code와 associated(관련) response을 
+    return할 것이고, in this case string뿐이다.
+- Why does that happen? 
+= 무슨 일이 있어난 건가?
+- To explain, we'll first introduce the concept 
+    that Nest employs two different options 
+    for manipulating responses:
+= explain을 위해서, first(먼저) Nest는 response을 manipulating(조작)하기 위해
+    two different options을 employs(사용)하는 concept을 introduce한다.
+- Standard(recommended) : 
+    Using this built-in method, 
+        when a request handler returns a JavaScript object or array, 
+        it will automatically be serialized to JSON. 
+    When it returns a JavaScript primitive type 
+        (e.g., string, number, boolean), however, Nest will send 
+        just the value without attempting to serialize it. 
+    This makes response handling simple: 
+        just return the value, and Nest takes care of the rest.
+    Furthermore, the response's status code is always 200 by default, 
+        except for POST requests which use 201. 
+    We can easily change this behavior 
+        by adding the @HttpCode(...) decorator 
+        at a handler-level (see Status codes).
+= Standard(recommended) :
+    this built-in method를 사용하면, 
+        resquest handler가 JavaScript object 또는 array을 return할 때,
+        automatically JSON으로 serialized될 것이다.
+    그러나 (예, string, number, boolean)같은 JavaScript primitive type을
+        반환할때, Nest는 primitive type 값을 serialize하려 attempting 없이
+        단지 value만 return한다.
+    This(이렇게 하는 건) response handling(처리)가 simple해진다:
+        단지 value를 return하면, Nest가 rest(나머지)를 처리한다.
+    계다가, response's status code는 "201"을 사용하는 POST requests를 제외하고,
+        항상 by default로 200이다.
+    @HttpCode(...) decorator를 handler-level에서 adding하여
+        this behavior(동작)을 easily change할 수 있다.
+    (Status codes 아래 링크)
+        !https://docs.nestjs.com/controllers#status-code!
+- Library-specific : 
+    We can use the library-specific (e.g., Express) response object, 
+        which can be injected using the @Res() decorator in the method 
+        handler signature (e.g., findAll(@Res() response)). 
+    With this approach, you have the ability 
+        to use the native response handling methods 
+        exposed by that object. 
+    For example, with Express, 
+        you can construct responses using code 
+        like response.status(200).send().
+= Library-specific :
+    method handler signature(예로, findAll(@Res() response))에
+        @Res() decorator를 사용하여 inject할 수 있는 
+        library-specific(예, Express)한 response object를 사용할 수 있다.
+    this approach로, that object에 exposed된 native response를
+        handling methods를 사용할 수 있다.
+    예를 들어, Express로, "response.status(200).send()" 같은 code를 사용해서
+        response를 construct(구성)할 수 있다.
+- WARNING
+    Nest detects when the handler is using either @Res() or @Next(), 
+        indicating you have chosen the library-specific option. 
+    If both approaches are used at the same time, 
+        the Standard approach is automatically disabled 
+        for this single route and will no longer work as expected. 
+    To use both approaches at the same time 
+        (for example, 
+        by injecting the response object to only set cookies/headers 
+        but still leave the rest to the framework), 
+    you must set the passthrough option 
+        to true in the @Res({ passthrough: true }) decorator.
+= 주의
+    Nest는 handler가 @Res() 또는 @Next()를 using할 때를 detects해서,
+        library-specific option을 chosen할 것을 indicating(나타)낸다.
+    both approaches는 at the same time을 used된 경우라면,
+        Standard approach은 this single route에 대해 
+        automatically disable(비활성)화되어 expected(예상)대로는
+        no longer(더 이상) work하지 않는다.
+    both approaches가 at the same time에 use하기 위해서
+        (예로, response object를 injecting하여 cookies/headers만 set하고
+        rest(나머지)는 framework에 그대로 둔다.),
+    @Res({ passthrough: true }) decorator에 passthrough option을
+        true로 set해야 한다.
+=====================================================================
