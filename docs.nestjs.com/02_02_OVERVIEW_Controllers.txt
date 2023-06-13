@@ -192,3 +192,95 @@ https://docs.nestjs.com/controllers
     @Res({ passthrough: true }) decorator에 passthrough option을
         true로 set해야 한다.
 =====================================================================
+[Request object]
+- Handlers often need access to the client request details. 
+= Handler는 종종 client request details에 access할 필요가 있다.
+- Nest provides access to the request object 
+    of the underlying platform (Express by default). 
+= Nest는 (by default로 Express인) underlying(기본) platform의
+    request object에 access(접근권한)을 provide한다.
+- We can access the request object by instructing Nest to inject it 
+    by adding the @Req() decorator to the handler's signature.
+= handler's signature에 @Req() decorator를 adding해서
+    Nest에 it(@Req~)를 inject하도록 instructing하여 request object에
+    access 할 수 있다.
+- ex) cats.controller.ts
+- HINT
+    In order to take advantage of express typings 
+    (as in the request: Request parameter example above), 
+    install @types/express package.
+= 힌트
+    typings으로 express를 이용하기 위해서
+    (위 ex)에서 "request: Request" parameter 처럼),
+    "@types/express" package를 설치해라.
+- The request object represents the HTTP request 
+    and has properties for the request query string, 
+    parameters, HTTP headers, and body (read more here). 
+= request object는 HTTP request를 represents(나타)내고 
+    request query string, parameter, HTTP headers, body(상세는 아래 링크)에
+    대한 properties를 가진다.
+        !https://expressjs.com/en/api.html#req!
+- In most cases, it's not necessary to grab these properties manually. 
+= In most cases에 manually(수동으로) these properties(속성)들을
+    grap(가져올) necessary(필요)는 없다.
+- We can use dedicated decorators instead, such as @Body() or @Query(), 
+    which are available out of the box. 
+    !out of the box : 즉시 사용할 수 있는!
+        !https://m.blog.naver.com/yangseungjae/220708695668!
+= 대신에 @Body() 또는 @Query() 같이 out of the box(즉시 사용)할 수 있는
+    dedicated(전용)한 decorator를 사용할 수 있다.
+- Below is a list of the provided decorators 
+    and the plain platform-specific objects they represent.
+= Below(아래엔) provided decorator와 they(decorators)가 represent하는
+    plain(일반) platform-specific 목록이 있다.
+- @Request(), @Req() : req
+- @Response(), @Res()* : res
+- @Next() : next
+- @Session() : req.session
+- @Param(key?: string) : req.params / req.params[key]
+- @Body(key?: string) : req.body / req.body[key]
+- @Query(key?: string) : req.query / req.query[key]
+- @Headers(name?: string) : req.headers / req.headers[name]
+- @Ip() : req.ip
+- @HostParam() : req.hosts
+- * For compatibility with typings across underlying HTTP platforms 
+    (e.g., Express and Fastify), 
+    Nest provides @Res() and @Response() decorators. 
+= underlying(기본) HTTP platforms(e.g., Express and Fastify) across(간에)
+    typings과 compatibility(호환성)을 위해,
+    Nest는 @Res and @Response() decorators를 provides한다.
+- @Res() is simply an alias for @Response(). 
+= @Res()는 @Response()의 simply alias(별칭)이다.
+- Both directly expose 
+    the underlying native platform response object interface. 
+= Both(@Res and @Response) underlying(기본) 
+    native platfrom response object interface를 directly expose(노출)한다.
+- When using them, 
+    you should also import the typings for the underlying library 
+    (e.g., @types/express) to take full advantage. 
+= them(@Res and @Response)을 사용할 때, full(최대) advantage(이용)하려면
+    underlying(기본) library(e.g., @types/express)를 typings해서
+    import 해야한다.
+- Note that when you inject either @Res() or @Response() 
+    in a method handler, 
+    you put Nest into Library-specific mode for that handler, 
+    and you become responsible for managing the response. 
+= method handler에 @Res() 또는 @Response()를 inject할 때,
+    that handler(위~)에 대한 Library-specific mode로 Nest를 put하고,
+    you는 response를 managing할 responsible이 become된다.
+- When doing so, you must issue some kind of response 
+    by making a call on the response object 
+    (e.g., res.json(...) or res.send(...)), 
+    or the HTTP server will hang.
+= doing so할 때, (e.g., res.json(...) or res.send(...)) 같은 
+    response object를 making a call함으로써 some kind of response을 issue
+    해야하고 or(그러지 않으면) HTTP server는 will hang(중단)될 것이다.
+- HINT
+    To learn how to create your own custom decorators, 
+    visit this chapter.
+= 힌트
+    your own custom decorators를 create하는 how to를 learn하기 위해서,
+        아래 링크를 visit해라.
+    자신만의 커스텀 데코레이터를 생성하는 방법을 알기 위해서는 이 캡터에서 확인할 수 있다.
+        !https://docs.nestjs.com/custom-decorators!
+=====================================================================
