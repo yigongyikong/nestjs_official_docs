@@ -306,3 +306,161 @@ https://docs.nestjs.com/controllers
 = In addition(또한), @All()은 all of them(모든 decorators)를 handles하는
     endpoint로 정의된다.
 =====================================================================
+[Route wildcards]
+- Pattern based routes are supported as well. 
+= Pattern based routes도 as well(역시) supported 된다.
+- For instance, the asterisk is used as a wildcard, 
+    and will match any combination of characters.
+= For instance, asterisk는 wildcard로 used되어
+    any combination(어떤 조합)의 characters와도 match(일치)할 것이다.
+- ex) @Get('ab*cd')
+    findAll() {...}
+- The 'ab*cd' route path will match abcd, ab_cd, abecd, and so on. 
+= 'ab*cd' route path는 'abcd', 'ab_cd', 'abecd' 등등과 match(일치)될 것이다.
+- The characters ?, +, *, and () may be used in a route path, 
+    and are subsets of their regular expression counterparts. 
+= '?', '+', '*', '()'는 route path에 사용되고,
+    regular expression counterparts(해당 정규식)의 subsets이다.
+- The hyphen (-) and the dot (.) are interpreted literally 
+    by string-based paths.
+= hyphen(-)과 dot(.)는 literally(문자 그대로) string-based paths로 해석된다.
+=====================================================================
+[Status code]
+- As mentioned, the response status code is always 200 by default, 
+    except for POST requests which are 201. 
+= mentioned(언급했듯이), response status code는 201인 POST requests를
+    제외하고 always 200이다.
+- We can easily change this behavior 
+    by adding the @HttpCode(...) decorator at a handler level.
+= handler level에서 @HttpCode(...) decorator를 adding하여
+    this behavior를 easily change할 수 있다.
+- ex) @Post()
+    @HttpCode(204)
+    create() {...}
+- HINT
+    Import HttpCode from the @nestjs/common package.
+= 힌트
+    HttpCode package에서 @nestjs/common를 가져온다.
+- Often, your status code isn't static but depends on various factors. 
+= Often(종종), status code는 static하지 않고 various factors에 따라 달라진다.
+- In that case, you can use a library-specific response 
+    (inject using @Res()) object 
+    (or, in case of an error, throw an exception).
+= In that case, library-specific response(@Res()를 써서 inject) 
+    object를 사용할 수 있다.(또는 in case of an error에 exception을 throw함).
+=====================================================================
+[Headers]
+- To specify a custom response header, 
+    you can either use a @Header() decorator 
+    or a library-specific response object 
+    (and call res.header() directly).
+= custom response header를 specify하기 위해서,
+    @Header() decorator 또는 library-specific response object를 
+    사용할 수 있다. (그리고 바로 res.header()라고 부른다.)
+- ex) @Post()
+    @Header('Cache-Control', 'none')
+    create() {...}
+- HINT
+    Import Header from the @nestjs/common package.
+= 힌트
+    @nestjs/common package에서 Header를 Import한다.
+=====================================================================
+[Redirection]
+- To redirect a response to a specific URL, 
+    you can either use a @Redirect() decorator 
+    or a library-specific response object 
+    (and call res.redirect() directly).
+= response를 specific URL로 redirect하려면, @Redirect() decorator 또는
+    library-specific response object를 use할 수 있다.
+    (and res.rediect()를 directly call 한다.)
+- @Redirect() takes two arguments, url and statusCode, 
+    both are optional. 
+= @Redirect()는 two arguments를 takes하고, url 그리고 statusCode는,
+    둘다 optional이다.
+- The default value of statusCode is 302 (Found) if omitted.
+= statusCode의 default value는 omitted되었다면 302 (Found)이다.
+- ex) @Get()
+    @Redirect('https://nestjs.com', 301)
+- Sometimes you may want to determine the HTTP status code 
+    or the redirect URL dynamically. 
+= Sometimes HTTP status code 또는 dynamically redirect URL을
+    determine해야 할 수 있다.
+- Do this by returning an object from the route handler method 
+    with the shape:
+= route handler method에서 with the shape로 object를 returning해서
+    this를 수행한다.
+- ex) { "url": string, "statusCode": number }
+- Returned values will override any arguments passed 
+    to the @Redirect() decorator. For example:
+= Returned values는 @Redirect() decorator에 passed된 any arguments를
+    override할 것이다. For example:
+- ex) @Get('docs')
+    @Redirect('https://docs.nestjs.com', 302)
+    getDocs(@Query('version') version) {
+        if (version && version === '5') {
+            return { url: 'https://docs.nestjs.com/v5/' };
+        }
+    }
+=====================================================================
+[Route parameters]
+- Routes with static paths won't work when you need to 
+    accept dynamic data as part of the request 
+    (e.g., GET /cats/1 to get cat with id 1). 
+= (e.g., GET /cats/1 to get cat with id 1)같이 request의 part(일부)로
+    dynamic data를 accept할 필요가 있는 때 static paths로
+    Routes는 won't work한다.
+- In order to define routes with parameters, 
+    we can add route parameter tokens in the path of the route 
+    to capture the dynamic value at that position in the request URL. 
+= parameter로 routes를 define하기 위해서,
+    path of the route에 route parameter tokens을 adding해서
+    request URL에 that position에 dynamic value를 capture할 수 있다.
+- The route parameter token in the @Get() decorator example 
+    below demonstrates this usage. 
+= @Get() decorator example에 route parameter token은
+    below(아래에) this usage(사용법)을 demonstrates(보여)준다.
+- Route parameters declared in this way can be accessed 
+    using the @Param() decorator, 
+    which should be added to the method signature.
+= Route parameters는 this way로 method signature에 의해 added되어야 하는
+    @Param() decorator를 using해서 accessed 될 수 있다.
+- HINT
+    Routes with parameters should be declared after any static paths. 
+    This prevents the parameterized paths 
+        from intercepting traffic destined for the static paths.
+= 힌트
+    Route with parameters는 any static paths after(다음에) 
+        declared되어야 한다.
+    This(위~)은 parameterized path가 static paths로 destined(향하는)
+        traffic을 intercepting하는 것을 prevents한다.
+- ex) @Get(':id')
+    findOne(@Param() params: any): string {
+        console.log(params.id);
+        return `This action returns a #${params.id} cat`;
+    }
+- @Param() is used to decorate a method parameter 
+    (params in the example above), 
+    and makes the route parameters available as properties of 
+    that decorated method parameter inside the body of the method.
+= @Param()은 method parameter를 (위 예시의 params) decorate하는데
+    used될 수 있어서, 
+    route parameters를 the body of the method inside(안에서)
+    decorated method parameter의 properties로 available하게 한다.
+- As seen in the code above, 
+    we can access the id parameter by referencing params.id. 
+= code above에서 보듯이, id parameter는 params.id를 referencing해서
+    access할 수 있다.
+- You can also pass in a particular parameter token to the decorator, 
+    and then reference the route parameter directly 
+    by name in the method body.
+= particular parameter token을 to the decorator에 pass한 다음,
+    method body에 name으로 route parameter를 directly reference할 수 있다.
+- HINT
+    Import Param from the @nestjs/common package.
+= 힌트
+    @nestjs/common package에서 Param을 Import해야 한다.
+- ex) @Get(':id')
+    findOne(@Param('id') id: string): string {
+        return `This action returns a #${id} cat`;
+    }
+=====================================================================
