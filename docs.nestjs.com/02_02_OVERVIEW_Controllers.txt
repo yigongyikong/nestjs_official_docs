@@ -284,3 +284,25 @@ https://docs.nestjs.com/controllers
     자신만의 커스텀 데코레이터를 생성하는 방법을 알기 위해서는 이 캡터에서 확인할 수 있다.
         !https://docs.nestjs.com/custom-decorators!
 =====================================================================
+[Resources]
+- Earlier, 
+    we defined an endpoint to fetch the cats resource (GET route). 
+= Earlier(이전에), 'cats' resource(GET route)를 fetch(가져오는)
+    endpoint를 정의했다.
+- We'll typically also want to provide an endpoint 
+    that creates new records. 
+= typically(일반적으로) new records를 create하는 endpoint도 provide하고 싶다.
+- For this, let's create the POST handler:
+= For this(이를 위해), POST handler를 create해 보자.
+- ex) cats.controller.ts
+- It's that simple. 
+= It(create a POST handler)는 simple하다.
+- Nest provides decorators for all of the standard HTTP methods: 
+    @Get(), @Post(), @Put(), @Delete(), @Patch(), @Options(), 
+    and @Head(). 
+= Nest는 all of the standard HTTP methods에 대한 decorators를 제공한다.:
+    @Get(), @Post(), @Put(), @Delete(), @Patch(), @Options(), @Head().
+- In addition, @All() defines an endpoint that handles all of them.
+= In addition(또한), @All()은 all of them(모든 decorators)를 handles하는
+    endpoint로 정의된다.
+=====================================================================
