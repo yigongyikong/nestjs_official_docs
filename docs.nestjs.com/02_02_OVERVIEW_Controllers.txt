@@ -680,3 +680,117 @@ https://docs.nestjs.com/controllers
     here(아래 링크)에 this feature에 대해 Read해라.
         !https://docs.nestjs.com/recipes/crud-generator!
 =====================================================================
+[Getting up and running]
+- With the above controller fully defined, 
+    Nest still doesn't know that CatsController exists 
+    and as a result won't create an instance of this class.
+= above controller가 fully defined된 With(채로),
+    Nest는 still(여전히) CatsController가 exists(존재)하는지 모르므로
+    and(그래서) as a result(결과)로서 this class의 instance를 create하지
+    않는다.
+- Controllers always belong to a module, 
+    which is why we include the controllers array 
+    within the @Module() decorator. 
+= Controllers는 always module에 belong해서, @Module() decorator 내에
+    controllers array에 include(포함)되게 된다.    
+- Since we haven't yet defined any other modules 
+    except the root AppModule, 
+    we'll use that to introduce the CatsController:
+= we는 yet(아직) the root AppModule을 except하고는 any other modules을
+    defined하지 않았기 때문에, CatsController를 introduce를 할 것이다.
+- ex) app.module.ts
+    import { Module } from '@nestjs/common';
+    import { CatsController } from './cats/cats.controller';
+
+    @Module({
+        controllers: [CatsController],
+    })
+    export class AppModule {}
+- We attached the metadata to the module class 
+    using the @Module() decorator, 
+    and Nest can now easily reflect 
+    which controllers have to be mounted.    
+= @Module() decorator를 using해서 module class에 metadata로 attached했고,
+    and(이제) Nest가 be mounted되어야할 controllers를 
+    easily reflect할 수 있다.
+=====================================================================
+[Library-specific approach]
+- So far we've discussed the Nest standard way 
+    of manipulating responses. 
+= So far(지금까지) responses를 manipulating(조작)하는 
+    Nest standard way에 대해 discussed(논의)했다.
+- The second way of manipulating the response is 
+    to use a library-specific response object. 
+= response를 manipulating하는 second way은
+    library-specific response object를 use(사용)하는 것이다.
+- In order to inject a particular response object, 
+    we need to use the @Res() decorator. 
+= particular response object를 inject하기 위해서, 
+    @Res() decorator를 use할 need가 있다.
+- To show the differences, 
+    let's rewrite the CatsController to the following:
+= differences(차이점)을 show하기 위해서, the following(아래)에 
+    CatsController를 rewrite해보자.
+- ex) 
+    import { Controller, Get, Post, Res, HttpStatus } from '@nestjs/common';
+    import { Response } from 'express';
+
+    @Controller('cats')
+    export class CatsController {
+        @Post()
+        create(@Res() res: Response) {
+            res.status(HttpStatus.CREATED).send();
+        }
+
+        @Get()
+        findAll(@Res() res: Response) {
+            res.status(HttpStatus.OK).json([]);
+        }
+    }
+- Though this approach works, and does in fact allow for 
+    more flexibility in some ways by providing full control 
+    of the response object 
+    (headers manipulation, library-specific features, and so on), 
+    it should be used with care. 
+= this approach(접근) works(방식)을 Though(통해), 그리고 in fact(실제로)
+    response object(headers 조작, library-specific 기능, 등)의 
+    full control(전체 제어)를 providing(제공)해서
+    some ways(방식)으로 more flexibility(유연성)을 allow한다
+    다만 with care(주의해서) be used(사용되어야) 한다.
+- In general, the approach is much less clear 
+    and does have some disadvantages. 
+= In general(일반적으로), approach(접근 방식)은 much less(훨씬 덜) clear하고
+    some disadvantages(몇 단점)을 가진다.
+- The main disadvantage is that your code becomes platform-dependent 
+    (as underlying libraries may have different APIs 
+        on the response object), 
+    and harder to test (you'll have to mock the response object, etc.).
+= main disadvantages는 code가 platform-dependent(플랫폼에 따라 달라지게)되고
+    (underlying(기본) libraries가 
+    response object에 different APIs를 가질수 있다)
+    test(response object 등을 mock(모의)하게 된다)하기 harder하다.
+- Also, in the example above, 
+    you lose compatibility with Nest features 
+    that depend on Nest standard response handling, 
+    such as Interceptors and @HttpCode() / @Header() decorators. 
+= 또한, above example에서, 
+    Interceptors 및 @HttpCode() / @Header() decorators와 같은
+    Nest standard response handling(처리)에 depend on(의존)하는
+    Nest features과 compatibility(호환성)이 lose(손실)된다.
+- To fix this, you can set the passthrough option to true, as follows:
+= this(위~)를 fix(해결)하기 위해서, as follows(아래 같이), passthrough option을
+    true로 set할 수 있다.
+- ex) @Get()
+    findAll(@Res({ passthrough: true }) res: Response) {
+        res.status(HttpStatus.OK);
+        return [];
+    }
+- Now you can interact with the native response object 
+    (for example, 
+    set cookies or headers depending on certain conditions), 
+    but leave the rest to the framework.
+= Now(이제) native(기본) response object와 interact할 수 있지만
+    (for example, certain conditions에 depending on(따라) 
+        cookies 또는 headers를 set한다 )
+    rest(나머지)는 framework에 leave(위임)한다.
+=====================================================================
