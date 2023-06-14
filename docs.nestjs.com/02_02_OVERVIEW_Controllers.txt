@@ -649,3 +649,34 @@ https://docs.nestjs.com/controllers
     here(아래 링크)에서 자세히 알아보세요.
         !https://docs.nestjs.com/techniques/validation#stripping-properties!
 =====================================================================
+[Handling errors]
+- There's a separate chapter about handling errors 
+    (i.e., working with exceptions) here.
+= here(아래 링크)에 errors handling(i.e., exceptions 작업)에 대한
+    separate(별도)의 chapter가 있다.
+    !https://docs.nestjs.com/exception-filters!
+=====================================================================
+[Full resource sample]
+- Below is an example that makes use of several 
+    of the available decorators to create a basic controller. 
+= Below는 basic controller를 create하기 위해 
+    several(몇몇)의 available한 decorators를 make use(사용)한 example이다.
+- This controller exposes a couple of methods to access 
+    and manipulate internal data.
+= This controller는 internal data에 access하고 manipulate하는
+    a couple of(몇몇) method를 exposes(제공)한다.
+- ex) cats.controller.ts
+- HINT
+    Nest CLI provides a generator (schematic) 
+    that automatically generates all the boilerplate code 
+    to help us avoid doing all of this, 
+    and make the developer experience much simpler. 
+    Read more about this feature here.
+= 힌트
+    Nest CLI는 all the boilerplate(상용구) code를 automatically
+        generates(생성)하는 generator(schematic(도식))를 provides하여
+        all of this(이 모든 작업)을 avoid하고,
+        developer가 much simpler(더 간단하게) experience(경험)하게 한다.
+    here(아래 링크)에 this feature에 대해 Read해라.
+        !https://docs.nestjs.com/recipes/crud-generator!
+=====================================================================
