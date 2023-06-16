@@ -1,9 +1,25 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query, Req } from '@nestjs/common';
 import { CreateCatDto, UpdateCatDto, ListAllEntities } from './dto/create-cat.dto';
-// import { Request } from 'express';
+import { CatsService } from './cats.service';
+import { Cat } from './interfaces/cat.interface';
 
 @Controller('cats')
 export class CatsController {
+    constructor(private catsService: CatsService) {}
+
+    @Post()
+    create(@Body() createCatDto: CreateCatDto) {
+        // return 'This action adds a new cat';
+        this.catsService.create(createCatDto);
+    }
+
+    @Get()
+    async findAll(): Promise<Cat[]> {
+        return this.catsService.findAll();
+    }
+
+
+    /*
     @Post()
     create(@Body() createCatDto: CreateCatDto) {
         return 'This action adds a new cat';
@@ -28,4 +44,5 @@ export class CatsController {
     remove(@Param('id') id: string) {
         return `This action removes a #${id} cat`;
     }
+    */
 }

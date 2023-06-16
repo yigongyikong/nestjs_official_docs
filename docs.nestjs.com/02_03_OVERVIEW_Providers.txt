@@ -1,0 +1,93 @@
+=====================================================================
+https://docs.nestjs.com/providers
+=====================================================================
+[Providers]
+- Providers are a fundamental concept in Nest. 
+= Providers는 Nest의 fundamental(기본) concept(개념)이다.
+- Many of the basic Nest classes may be treated as a provider
+     – services, repositories, factories, helpers, and so on. 
+= Many of(많은) the basic Nest class는 services, repositories,
+    factories, helpers 등등 으로 provider로 treated(취급)될 수 있다.
+- The main idea of a provider is 
+    that it can be injected as a dependency; 
+    this means objects can create various relationships with each other, 
+    and the function of "wiring up" instances of objects 
+    can largely be delegated to the Nest runtime system.
+= provider의 main idea는 dependency(종속성)으로 injected(주입)할 수 있고;
+    this(위~)은 objects가 each other(서로) various relationships를
+    create할 수 있어서 instances of objects(객체 인스턴스)를 "wiring up"하는
+    function은 largely(대개) Nest runtime system에 delegated(위임)될 수 있다.
+- In the previous chapter, we built a simple CatsController. 
+= In the previous chapter에서 simple CatsController는 built해보자.
+- Controllers should handle HTTP requests and delegate 
+    more complex tasks to providers. 
+= Controllers는 HTTP requests을 handle해야하고 
+    providers에게 more complex tasks를 delegate해야 한다.
+- Providers are plain JavaScript classes 
+    that are declared as providers in a module.
+= Providers는 module에서 providers로 
+    declared(선언)된 plain JavaScript classes다.
+- HINT
+    Since Nest enables the possibility to design 
+        and organize dependencies in a more OO way, 
+        we strongly recommend following the SOLID principles.
+= 힌트
+    Nest 더 많은 OO 방식으로 dependencies(종속성)를 design하고
+        organize할 수 있는 possibility을 enables(가능하게)하기 때문에,
+        we(우리)는 strongly하게 SOLID principles(원칙)을 
+        following(따르)길 recommend(권장)한다.
+    !S(Single responsibility principle) : 한 클래스는 하나의 책임만 가진다.
+    O(Open/closed principle) : 확장에는 열려 있으나 변경에는 닫혀 있어야 한다.
+    L(Liskov substitution principle) : 객체는 정확성을 깨뜨리지 않고
+        하위 타입의 인스턴스로 바꿀 수 있어야 한다.
+    I(Interface segregation principle) : 인터페이스 여러 개가
+        범용 인터페이스 하나보다 낫다.
+    D(Dependency inversion principle) : 추상화에 의존해야지, 구체화에 의존하면
+        안된다, 의존성 주입이 이 원칙을 따른다.!
+        !https://en.wikipedia.org/wiki/SOLID!
+=====================================================================
+[Services]
+- Let's start by creating a simple CatsService. 
+= simple CatsService를 creating해서 start해보자.
+- This service will be responsible for data storage and retrieval, 
+    and is designed to be used by the CatsController, 
+    so it's a good candidate to be defined as a provider.
+= This service는 data storage 및 retrieval를 responsible할 것이고,
+    CatsController에서 be used되도록 is designed(설계)되어서,
+    as a provider로서 be defined되기에 good candidate이다.
+- ex) cat.service.ts
+- HINT
+    To create a service using the CLI, 
+    simply execute the $ nest g service cats command.
+= 힌트
+    CLI를 using해서 service를 create하기 위해서,
+    simply "$ nest g service cats" command를 execute하면 된다.
+- Our CatsService is a basic class with one property and two methods.
+= Our(위~) CatsService는 one property와 two methods가 있는 basic class이다.
+- The only new feature is that it uses the @Injectable() decorator. 
+= The only new feature는 @Injectable() decorator를 uses한다는 것이다.
+- The @Injectable() decorator attaches metadata, 
+    which declares that CatsService is a class 
+    that can be managed by the Nest IoC container. 
+= The @Injectable() decorator는 CatsService가 Nest IoC container에 의해 
+    be managed될수 있는 class라는 것을 declares하는 metadata를 attaches한다.
+- By the way, this example also uses a Cat interface, 
+    which probably looks something like this:
+= By the way, this example은 also like this(아래 ex)와 같은 something으로
+    Cat interface를 uses한다.
+- ex) interfaces/cat.interface.ts
+- Now that we have a service class to retrieve cats, 
+    let's use it inside the CatsController:
+= Now(이제) cats를 retrieve(검색)하는 service class가 있어서,
+    CatsController inside에 it(service)를 use해보자.
+- ex) cats.controller.ts
+- The CatsService is injected through the class constructor. 
+= CatsService는 class constructor를 통해 inject 된다.
+- Notice the use of the private syntax. 
+= private syntax(구문)을 사용해야 함을 주의해라.
+- This shorthand allows us to both declare 
+    and initialize the catsService member immediately 
+    in the same location.
+= 이 shorthand(줄임말)은 the same location(해당 위치)에서 immediately(바로) 
+    catsService member를 declare(선언)과 initialize(초기화) 하게한다.
+=====================================================================
