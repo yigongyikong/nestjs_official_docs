@@ -91,3 +91,217 @@ https://docs.nestjs.com/providers
 = 이 shorthand(줄임말)은 the same location(해당 위치)에서 immediately(바로) 
     catsService member를 declare(선언)과 initialize(초기화) 하게한다.
 =====================================================================
+[Dependency injection]
+- Nest is built around the strong design pattern commonly 
+    known as Dependency injection. 
+= Nest는 commonly(일반적으로) Dependency injection(종속성 주입)으로 불리는 
+    strong(강력한) design pattern을 around(기반)으로 built(만들어)졌다.
+- We recommend reading a great article about this concept 
+    in the official Angular documentation.
+    !https://angular.io/guide/dependency-injection!
+= official Angular docs~에서 this concept(개념)에 대해 great article을
+    reading하는 것을 recommend한다.
+- In Nest, thanks to TypeScript capabilities, 
+    it's extremely easy to manage dependencies 
+    because they are resolved just by type. 
+= In Nest, TypeScript capabilities(기능) 덕분에 by type(유형별)로 
+    are resolved(해결)되기에 dependencies(종속성) manage하기가 
+    extremely(매우) easy하다.
+- In the example below, 
+    Nest will resolve the catsService by creating 
+    and returning an instance of CatsService 
+    (or, in the normal case of a singleton, 
+    returning the existing instance 
+    if it has already been requested elsewhere). 
+= In the example below(아래 예시에서), Nest는 CatService instance를
+    creating하고 returning해서 catsService를 resolve할 것이다
+    (or, normal case의 singleton에서, already elsewhere에서
+    has been requested된 existing(기존) instance를 returning한다.)
+    !singleton : 객체의 인스턴스가 오직 1개만 생성되는 패턴!
+        !https://tecoble.techcourse.co.kr/post/2020-11-07-singleton/!
+- This dependency is resolved and passed 
+    to your controller's constructor 
+    (or assigned to the indicated property):
+= This dependency는 resolved되어 controller의 constructor를
+    passed하게 된다. (또는 indicated property를 assigned한다.)
+- ex) constructor(private catsService: CatsService) {}
+=====================================================================
+[Scopes]
+- Providers normally have a lifetime ("scope") synchronized 
+    with the application lifecycle. 
+= Providers는 normally(일반적)으로 application lifecycle과
+    synchronized된 lifetime ("scope(범위)")를 가진다.
+- When the application is bootstrapped, 
+    every dependency must be resolved, 
+    and therefore every provider has to be instantiated. 
+= application이 bootstrapped되면, 
+    every dependency는 resolved되어야 하고, 그래서 therefore(결국) 
+    every provider는 instantiated(인스턴화)해야 한다.
+- Similarly, when the application shuts down, 
+    each provider will be destroyed. 
+= Similarly(마찬가지로), application이 shuts down되면,
+    each provider는 destroyed될 것이다.
+- However, there are ways to make your provider lifetime 
+    request-scoped as well. 
+= 그러나, provider의 lifetime을 request-scroped로 만드는 방법 역시 있다.
+- You can read more about these techniques here.
+= 이러한 기술적 내용은 아래 링크에서 자세히 살펴봐라.
+    !https://docs.nestjs.com/fundamentals/injection-scopes!
+=====================================================================
+[Custom providers]
+- Nest has a built-in inversion of control ("IoC") container 
+    that resolves relationships between providers. 
+= Nest는 providers between(간) relationships(관계)를 resolves(해결)하는 
+    inversion of control("IoC")(제어 역전) container(컨테이너)가 
+    built-in(내장)되어 있다.
+- This feature underlies the dependency injection feature 
+    described above, but is in fact far more powerful than 
+    what we've described so far. 
+= 이 feature는 described above(위에서 설명)한 dependency injection feature을 
+    underlies(기초로 하)지만, in fact far(사실 이제껏) described(설명한) 것 
+    보다 far more(훨씬 더) powerful(강력)하다.
+- There are several ways to define a provider: 
+    you can use plain values, classes, 
+    and either asynchronous or synchronous factories. 
+= provider를 define(정의)하는 several(몇 가지) 방식이 있다:
+    plane values(일반 값), classes, 
+    asynchronous 또는 synchronous factories를 사용할 수 있다.
+- More examples are provided here.
+= More examples(더 많은 예제들)은 아래 링크에 제공된다.
+    !https://docs.nestjs.com/fundamentals/dependency-injection!
+=====================================================================
+[Optional providers]
+- Occasionally, you might have dependencies 
+    which do not necessarily have to be resolved. 
+= Occasionally(경우에 따라), necessarily(반드시) have to be resolved(해결)
+    되어야할 필요는 없는, dependencies(종속성)을 might have 있을 수 있다.
+- For instance, your class may depend on a configuration object, 
+    but if none is passed, the default values should be used. 
+= For instance(예를 들어), class는 configuration object에 
+    depend on(의존)할 수 있지만, passed(전달)된 것은 none(없지)다면,
+    default values이 should be used(사용)되어야 한다.
+- In such a case, the dependency becomes optional, 
+    because lack of the configuration provider wouldn't lead to errors.
+= In such a case(이러한 경우), configuration provider의 lack(부족)에도
+    errors가 lead하지 않을 것이기 때문에, dependency는 optional(선택사항)이 된다.
+- To indicate a provider is optional, 
+    use the @Optional() decorator in the constructor's signature.
+= provider가 optional임을 indicate(나타내)려면, 
+    constructor signature에 @Optional() decorator를 사용한다.
+- ex) import { Injectable, Optional, Inject } from '@nestjs/common';
+    @Injectable()
+    export class HttpService<T> {
+        constructor(@Optional() @Inject('HTTP_OPTIONS') private httpClient: T) {}
+    }
+- Note that in the example above we are using a custom provider, 
+    which is the reason we include the HTTP_OPTIONS custom token. 
+= in the example above(위 예에서) custom provider를 are using하고 있고,
+    which(이것은) HTTP_OPTIONS custom token을 include하는 reason이다.
+- Previous examples showed constructor-based injection 
+    indicating a dependency through a class in the constructor. 
+= Previous example에서 in the constructor에 class를 통해 dependency를
+    indicating(나타)하는 constructor-based injection을 보여줬다.
+- Read more about custom providers and their associated tokens here.
+= custom(사용자 지정) providers 와 associated(관련) tokens에 대한 
+    내용은 아래 링크를 보라.
+    !https://docs.nestjs.com/fundamentals/custom-providers!
+=====================================================================
+[Property-based injection]
+- The technique we've used so far is called constructor-based injection, 
+    as providers are injected via the constructor method. 
+= so far(지금까지) used된 The technique(기술)은 
+    constructor-based injection이라고 called되고,
+    constructor method를 via(통해) providers가 injected된다.
+- In some very specific cases, property-based injection might be useful. 
+= In some very specific cases, property-based injection(속성-기반 주입)이
+    useful(유용)할 수 있다.
+- For instance, if your top-level class depends on 
+    either one or multiple providers, 
+    passing them all the way up by calling super() in sub-classes 
+    from the constructor can be very tedious. 
+= For instance, top-level class가 one 또는 multiple providers에
+    depends on(의존)하면, constructor로 부터 sub-classes에 super()를
+    calling(호출)해서 all the way up(끝까지) passing(전달)하는 것은
+    tedious(지루)해질 수 있다.
+- In order to avoid this, 
+    you can use the @Inject() decorator at the property level.
+= this(위~)를 avoid(피하)기 위해, @Inject()decorator를 property level에서
+    use(사용)할 수 있다.
+- ex) import { Injectable, Inject } from '@nestjs/common';
+    @Injectable()
+    export class HttpService<T> {
+        @Inject('HTTP_OPTIONS')
+        private readonly httpClient: T;
+    }
+- WARNING
+    If your class doesn't extend another provider, 
+    you should always prefer using constructor-based injection.
+= 경고
+    class가 another provider를 extend(확장)하지 않는다면,
+    constructor-based injection을 prefer using(사용하는 편)이 더 좋다.
+=====================================================================
+[Provider registration]
+- Now that we have defined a provider (CatsService), 
+    and we have a consumer of that service (CatsController), 
+    we need to register the service with Nest 
+    so that it can perform the injection. 
+= Now(이제) provider (CatsService)를 define(정의)했고, 
+    service consumer(소비자)로 (CatsController)가 있어서,
+    injection을 perform할 수 있도록 Nest에 service를 register해야 한다.
+- We do this by editing our module file (app.module.ts) 
+    and adding the service to the providers array 
+    of the @Module() decorator.
+= module file(app.module.ts)을 editing하고 @Module() decorator의
+    providers array(배열)에 service를 adding해서 this(위~)를 수행한다.
+- ex) app.module.ts
+    import { Module } from '@nestjs/common';
+    import { CatsController } from './cats/cats.controller';
+    import { CatsService } from './cats/cats.service';
+
+    @Module({
+        controllers: [CatsController],
+        providers: [CatsService],
+    })
+    export class AppModule {}
+- Nest will now be able to resolve the dependencies 
+    of the CatsController class.
+= Nest는 now(이제) CatsController class의 dependencies를 해소할 수 있을 것이다.
+- This is how our directory structure should look now:
+= 이제 디렉토리 구조는 다음과 같다.
+-   src
+    -   cats
+        -   dto
+            -   create-cat.dto.ts
+        -   interfaces
+            -   cat.interface.ts
+        -   cats.controller.ts
+        -   cats.service.ts
+    -   app.module.ts
+    -   main.ts
+=====================================================================
+[Manual instantiation]
+- Thus far, we've discussed how Nest automatically handles most 
+    of the details of resolving dependencies. 
+= Thus far(지금까지), Nest가 dependencies를 resolving에 details(세부사항)의
+    most of(대부분)을 자동적으로 처리하는 how(방법)에 대해 논의했다.
+- In certain circumstances, 
+    you may need to step outside of the built-in Dependency Injection 
+    system and manually retrieve or instantiate providers. 
+= In certain circumstances(특정 사황에서), 
+    built-in Dependency Injection system의 outside(외부로) step(이동)해
+    providers를 manually(수동으로) retrieve(검색) 또는 instantiate할 필요가 있다.
+- We briefly discuss two such topics below.
+= below(아래에) two such topics(두가지 주제)에 대해 논의해보자.
+- To get existing instances, or instantiate providers dynamically, 
+    you can use Module reference.
+= existing(기존) instances를 get하거나, 또는 dynamically providers를 
+    instantiate하려면, Module reference를 사용해서 그렇게 할 수 있다.
+- To get providers within the bootstrap() function 
+    (for example for standalone applications without controllers, 
+    or to utilize a configuration service during bootstrapping) 
+    see Standalone applications.
+= bootstrap() 기능 내에 providers를 가져오려면 
+    Standalone applications 참조하라.
+    (예로, controllers 없는 standalone applications인 경우
+        또는 bootstrapping 중 configuration service를 활용하는 경우)
+=====================================================================
