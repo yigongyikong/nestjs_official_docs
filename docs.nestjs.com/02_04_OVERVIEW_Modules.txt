@@ -156,3 +156,34 @@ https://docs.nestjs.com/modules
     access(접근) 가능하고 it(CatsService)를 as well(또한) import하는
     all other modules과 same instance를 share할 것이다.
 =====================================================================
+[Module re-exporting]
+- As seen above, Modules can export their internal providers. 
+= As seen above, Modules는 internal providers를 export할 수 있다.
+- In addition, they can re-export modules that they import. 
+= In addition(또한), they import한 modules을 re-export할 수 있다.
+- In the example below, the CommonModule is both imported into 
+    and exported from the CoreModule, 
+    making it available for other modules which import this one.
+= In the example below(아래 예제에서), CommonModule은
+    CoreModeule로 imported into(가져)와지고 and exported from(내보)내서,
+    this one(CommonModule)을 import한 other modules에서 it(CommonModule)을
+    available(이용 가능하게) 한다.
+- ex) @Module({
+        imports: [CommonModule],
+        exports: [CommonModule],
+    })
+    export class CoreModule {}
+=====================================================================
+[Dependency injection]
+- A module class can inject providers as well 
+    (e.g., for configuration purposes):
+= module class는 providers도 as well(역시) inject할 수 있다.
+    (예시, configuration(구성) 목적용)
+- ex) cats.module.ts
+- However, module classes themselves cannot be injected 
+    as providers due to circular dependency(below link).
+        !https://docs.nestjs.com/fundamentals/circular-dependency!
+= However(하지만), module classes는 themselves(그 자체)는 
+    circular dependency(순환 종속성)으로 due to(인한) providers로
+    inject할 수 없다.
+=====================================================================
