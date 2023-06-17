@@ -187,3 +187,181 @@ https://docs.nestjs.com/modules
     circular dependency(순환 종속성)으로 due to(인한) providers로
     inject할 수 없다.
 =====================================================================
+[Global modules]
+- If you have to import the same set of modules everywhere, 
+    it can get tedious. 
+= everywhere(모든 곳에) the same set of modules을 import 해야한다면, 
+    it can get tedious(지겨울 수 있)다.
+- Unlike in Nest, Angular providers are registered in the global scope. 
+= Nest와 달리, Angular providers는 global scope에 are registered(동록)되었다.
+- Once defined, they're available everywhere. 
+= Once(일단) defined되면, they(provider)는 everywhere 곳에서 available하다.
+- Nest, however, encapsulates providers inside the module scope. 
+= however, Nest는 module scope 내에 있는 providers를 encapsulates한다.
+- You aren't able to use a module's providers elsewhere 
+    without first importing the encapsulating module.
+= the encapsulating module을 first(먼저) importing하지 않고 
+    elsewhere(다른 곳)에서 module's providers를 use할 수 없다.
+- When you want to provide a set of providers 
+    which should be available everywhere out-of-the-box 
+    (e.g., helpers, database connections, etc.), 
+    make the module global with the @Global() decorator.
+= everywhere에서 out-of-the-box(즉시) should be available(사용 가능해야 하는)
+    a set of providers(예, helpers, database connections, 등)를
+    provide하길 원한다면, @Global() decorator를 global(전역)으로 만들어야 한다.
+- ex)   import { Module, Global } from '@nestjs/common';
+        import { CatsController } from './cats.controller';
+        import { CatsService } from './cats.service';
+
+        @Global()
+        @Module({
+            controllers: [CatsController],
+            providers: [CatsService],
+            exports: [CatsService],
+        })
+        export class CatsModule {}
+- The @Global() decorator makes the module global-scoped. 
+= @Global() decorator는 global-scoped(전역-범위)로 module을 생성한다.
+- Global modules should be registered only once, 
+    generally by the root or core module. 
+= Global modules은 generally(일반적으로) root 또는 core module에, 
+    once(일단) only(한번) should be registered(등록되어야 한)다.
+- In the above example, the CatsService provider will be ubiquitous, 
+    and modules that wish to inject the service will not need to 
+    import the CatsModule in their imports array.
+= In the above example(위 예제에서), CatsService provider는 ubiquitous가 
+    될 것이고, service를 inject하려는 module은 imports array에 CatsModule을
+    import할 필요는 없어집니다.
+- HINT
+    Making everything global is not a good design decision. 
+    Global modules are available 
+        to reduce the amount of necessary boilerplate. 
+    The imports array is generally the preferred way 
+        to make the module's API available to consumers.
+= 힌트
+    everything(모든 것)을 global로 Making것은 좋지 않은 design 결정이다.
+    Global modules은 necessary한 boilerplate(상용구)의 the amount of을 
+        reduce(줄이는)데 available(사용가능)하다.
+    The imports array은 generally(일반적으로) consumers에게
+        module's API를 available하는 게 preferred way이다.
+=====================================================================
+[Dynamic modules]
+- The Nest module system includes a powerful feature 
+    called dynamic modules. 
+= Nest module system은 dynamic module이라는 powerful feature를 포함한다.
+- This feature enables you to easily create customizable modules 
+    that can register and configure providers dynamically. 
+= 이 feature은 dynamically으로 providers를 register 및 configure할수 있는 
+    customizable module을 easily create할 수 있게 할 수 있다.
+- Dynamic modules are covered extensively here. 
+= Dynamic modules은 here(아래 링크)에서 extensively(폭 넒게) covered(다룹)니다.
+    !https://docs.nestjs.com/fundamentals/dynamic-modules!
+- In this chapter, 
+    we'll give a brief overview to complete the introduction to modules.
+= 이번 장에서, modules에 대해 introduction를 complete하는 
+    brief overview 제공합니다.
+- Following is an example of a dynamic module definition 
+    for a DatabaseModule:
+= 다음 예제(Following)는 DatabaseModule에 대한 
+    dynamic module definition의 example이다.
+- ex)   import { Module, DynamicModule } from '@nestjs/common';
+        import { createDatabaseProviders } from './database.providers';
+        import { Connection } from './connection.provider';
+
+        @Module({
+            providers: [Connection],
+        })
+        export class DatabaseModule {
+            static forRoot(entities = [], options?): DynamicModule {
+                const providers = createDatabaseProviders(options, entities);
+                return {
+                    module: DatabaseModule,
+                    providers: providers,
+                    exports: providers,
+                };
+            }
+        }
+- HINT
+    The forRoot() method may return a dynamic module 
+        either synchronously or asynchronously (i.e., via a Promise).
+= 힌트
+    forRoot() method는 synchronously 또는 asynchronously(Promise로)으로
+        dynamic module을 return할 수 있다.
+- This module defines the Connection provider by default 
+    (in the @Module() decorator metadata), 
+    but additionally - depending on the entities and options objects 
+    passed into the forRoot() method - exposes a collection 
+    of providers, for example, repositories. 
+= This module은 기본적으로 Connection provider을 정의하고
+    (@Module() decorator), 하지만 추가적으로-forRoot() method에 전달된 
+    entities 및 option objects에 기안해서- 예를 들어 repositories 처럼
+    providers의 collection을 exposes한다.
+- Note that the properties returned by the dynamic module extend 
+    (rather than override) the base module metadata defined 
+    in the @Module() decorator. 
+= the dynamic module에 의해 returned된 properties(속성)은
+    @Module() decorator에서 defined된 base(기본) module metadata를
+    extend한다(override 보단)
+- That's how both the statically declared Connection provider 
+    and the dynamically generated repository providers 
+    are exported from the module.
+= That은 statically declared(선언)된 Connection provider와 
+    dynamically generated repositories providers가 둘다(both)
+    module로 부터 exported된다.
+- If you want to register a dynamic module in the global scope, 
+    set the global property to true.
+= global scope에 dynamic module을 want to register(등록)하고 싶다면, 
+    global property를 true로 set(설정)해라.
+- ex)   {
+            global: true,
+            module: DatabaseModule,
+            providers: providers,
+            exports: providers,
+        }
+- WARNING
+    As mentioned above, making everything global 
+        is not a good design decision.
+= 경고
+    As mentioned above(위에서 언급했듯이), 
+        everything(모든 것)을 global로 making하는 것은 좋은 design 결정이 아니다.
+- The DatabaseModule can be imported and configured 
+    in the following manner:
+= DatabaseModule은 following manner(아래 예제 방식)으로 
+    configured하고 imported 할 수 있다.
+- ex)   import { Module } from '@nestjs/common';
+        import { DatabaseModule } from './database/database.module';
+        import { User } from './users/entities/user.entity';
+
+        @Module({
+            imports: [DatabaseModule.forRoot([User])],
+        })
+        export class AppModule {}
+- If you want to in turn re-export a dynamic module, 
+    you can omit the forRoot() method call in the exports array:
+= dynamic module을 in turn(차례로) re-export(다시 내보내)고 싶다면,
+    exports array에서 forRoot() method call을 omit 할 수 있다.
+- ex)   import { Module } from '@nestjs/common';
+        import { DatabaseModule } from './database/database.module';
+        import { User } from './users/entities/user.entity';
+
+        @Module({
+            imports: [DatabaseModule.forRoot([User])],
+            exports: [DatabaseModule],
+        })
+        export class AppModule {}
+- The Dynamic modules chapter covers this topic in greater detail, 
+    and includes a working example.
+= Dynamic modules(link1) chapter는 this topic(이 주제)에 대해 
+    greater(훨씬 더) detail(자세하)게 cover(다루)고,
+    working(동작)하는 example(예제)(link2)를 include한다.
+    !link1 : https://docs.nestjs.com/fundamentals/dynamic-modules!
+    !link2 : https://github.com/nestjs/nest/tree/master/sample/25-dynamic-modules!
+- HINT
+    Learn how to build highly customizable dynamic modules 
+        with the use of ConfigurableModuleBuilder here(link) 
+        in this chapter.
+    !https://docs.nestjs.com/fundamentals/dynamic-modules#configurable-module-builder!
+= 힌트
+    in this chapter에서 ConfigurableModuleBuilder를 with the use(사용하여) 
+        highly(고도로) customizable된 dynamic modules을 build하는지 배워보라.
+=====================================================================
