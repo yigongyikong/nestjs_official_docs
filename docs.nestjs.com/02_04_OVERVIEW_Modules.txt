@@ -1,0 +1,128 @@
+=====================================================================
+https://docs.nestjs.com/modules
+=====================================================================
+[Modules]
+- A module is a class annotated with a @Module() decorator. 
+= module은 @Module() decorator로 annotated(주석이 달려진)된 class를 말한다.
+- The @Module() decorator provides metadata 
+    that Nest makes use of to organize the application structure.
+= @Module() decorator는 Nest가 application structure를 구성하는 데 
+    사용하는 metadata를 제공한다.
+- Each application has at least one module, a root module. 
+= 각 application은 at least(최소) 하나의 module인 root module을 가진다.
+- The root module is the starting point 
+    Nest uses to build the application graph - 
+    the internal data structure Nest uses to resolve module 
+    and provider relationships and dependencies. 
+= root module은 Nest가 application graph를 build하는데 use하는
+    starting point(시작점)이다 
+    - Nest가 module과 provider relationships 및 dependencies을
+    resolve하는데 uses하는 internal data structure이다.
+- While very small applications may theoretically have 
+    just the root module, this is not the typical case. 
+= very small application은 theoretically root module만 가질 수 있지만,
+    this(위~)은 typical(일반적인) case는 아니다.
+- We want to emphasize that modules are strongly recommended 
+    as an effective way to organize your components. 
+= components를 organize(구성)하는 effective(효과적인) way(방법)으로
+    modules이 strongly하게 recommended된다는 점을 emphasize(강조)하고 싶다.
+- Thus, for most applications, 
+    the resulting architecture will employ multiple modules, 
+    each encapsulating a closely related set of capabilities.
+= Thus(따라서), most application에서, resulting architecture는
+    each(각각) closely(밀접하게) related(관련된) capabilities(기능)의 set을
+    encapsulating(캡슐화)하는 multiple modules(여러 모듈)을 사용한다.
+- The @Module() decorator takes a single object 
+    whose properties describe the module:
+= @Module() decorator는 properties이 module을 describe(설명)하는 
+    single object(단일 객체)를 사용한다.
+- providers
+    the providers that will be instantiated by the Nest injector 
+    and that may be shared at least across this module
+= providers
+    Nest injector에 의해 instantiated(초기화)되어 at least(적어도) 
+    this module에서 공유될 수 있는 provider
+- controllers
+    the set of controllers defined in this module 
+    which have to be instantiated
+= controller
+    instantiated되어야하는 this module에 defined(정의)된 controller set
+- imports
+    the list of imported modules that export the providers 
+    which are required in this module
+= imports
+    this module에 required(요구)되는 providers를 export하고 
+    imported된 modules 리스트
+- exports
+    the subset of providers that are provided by this module 
+    and should be available in other modules which import this module. 
+    You can use either the provider itself or just its token 
+    (provide value)
+= exports
+    this module에 의해 provided(제공되)는 providers의 subset은
+        this module을 import(가져오는) other module에서 available해야 한다.
+    provider itself(그 자체) 또는 its(해당) token(provide value)만으로
+        사용할 수 있다. 
+- The module encapsulates providers by default. 
+= The module은 by default(기본적으로) providers를 encapsulates한다.
+- This means that it's impossible to inject providers 
+    that are neither directly part of the current module 
+    nor exported from the imported modules. 
+= current module의 directly part도 아니고 imported(가져온) modules에서
+    exported(내보낸) providers도 inject하는 게 impossible하다는 것을 means한다.
+- Thus, you may consider the exported providers 
+    from a module as the module's public interface, or API.
+= Thus(따라서), module에서 exported된 providers를
+    module's public interface 또는 API로 consider할 수 있어야 한다.
+=====================================================================
+[Feature modules]
+- The CatsController and CatsService belong to 
+    the same application domain. 
+= CatsController 와 CatsService는 동일한 application domain에 속한다.
+- As they are closely related, 
+    it makes sense to move them into a feature module. 
+= they(CatsCon~과 CatsSer~)은 closely(밀접하게) 관련되어 있어서,
+    feature module로 them(위 they)을 move하는 게 맞다.
+- A feature module simply organizes code 
+    relevant for a specific feature, 
+    keeping code organized and establishing clear boundaries. 
+= feature module은 simply(단순히) specific feature과 관련된 code를 구성해서,
+    code가 clear(명확한) boundaries(경계)를 keeping한다.
+- This helps us manage complexity and develop with SOLID principles, 
+    especially as the size of the application and/or team grow.
+= This(위~)는 especially application 또는 teamd의 size가 grow(성장)함에 따라,
+    complexity을 manage하고 SOLID principles에 따라 develop하는데 도움이 된다.
+- To demonstrate this, we'll create the CatsModule.
+= this를 demonstrate(시연)하기 위해, CatsModule을 생성할 것이다.
+- ex) cats/cats.module.ts
+- HINT
+    To create a module using the CLI, 
+    simply execute the $ nest g module cats command.
+= 힌트
+    CLI를 using해서 module을 생성하기 위해서,
+    simply(간단히) "$ nest g module cats" command(명령어)를 실행하면 된다.
+- Above, we defined the CatsModule in the cats.module.ts file, 
+    and moved everything related to this module into the cats directory. 
+= 위 예시처럼, "cats.module.ts" 파일에 CatsModule을 defined(정의)했고,
+    cats directory에 this module과 관련된 것들이 옮겨진다.
+- The last thing we need to do is import this module 
+    into the root module 
+    (the AppModule, defined in the app.module.ts file).
+= The last thing(마지막으로) need to do(해야할)일은
+    root module(app.module.ts에 정의된 AppModule)에 
+    this module을 import하면된다.
+- ex) app.module.ts
+- Here is how our directory structure looks now:
+= Here에 directory structure는 looks now(아래와 같)다.
+-   src
+    -   cats
+        -   dto
+            create-cat.dto.ts
+        -   interfaces
+            cat.interface.ts
+        cats.controller.ts
+        cats.module.ts
+        cats.service.ts
+    -   app.module.ts
+    -   main.ts
+=====================================================================
