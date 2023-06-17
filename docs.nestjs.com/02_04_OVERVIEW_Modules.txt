@@ -126,3 +126,33 @@ https://docs.nestjs.com/modules
     -   app.module.ts
     -   main.ts
 =====================================================================
+[Shared modules]
+- In Nest, modules are singletons by default, 
+    and thus you can share the same instance of any provider 
+    between multiple modules effortlessly.
+= Nest에서, module은 by default(기본으로) singletons이고,
+    그래서 multiple module 간에 any provider의 same(동일)한 instance를
+    effortlessly(쉽게) share(공유)할 수 있다.
+- Every module is automatically a shared module. 
+= Every module은 automatically으로 shared module이다.
+- Once created it can be reused by any module. 
+= 일단 it(module)을 생성하면 any module에서도 재사용할 수 있다.
+- Let's imagine that we want to share an instance 
+    of the CatsService between several other modules. 
+= several othoer modules between(간)에 CatsService의 instance를 
+    공유하고 싶다고 상상해보자.
+- In order to do that, 
+    we first need to export the CatsService provider 
+    by adding it to the module's exports array, as shown below:
+= In order to do that(그렇게 하기 위해서), first(먼저) as shown below(아래),
+    ex)와 같은 module's export array에 it(위 CatsS~ pro~)에 adding해서 
+    CatsService provider를 export할 필요가 있다.
+- ex) cats.module.ts
+- Now any module 
+    that imports the CatsModule has access to the CatsService 
+    and will share the same instance with all other modules 
+    that import it as well.
+= Now(이제) CatsModule을 imports하는 any module도 CatsService에 
+    access(접근) 가능하고 it(CatsService)를 as well(또한) import하는
+    all other modules과 same instance를 share할 것이다.
+=====================================================================
