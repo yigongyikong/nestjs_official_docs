@@ -62,3 +62,75 @@ https://docs.nestjs.com/middleware
         !link : https://docs.nestjs.com/techniques/performance#middleware!
 - ex) logger.middleware.ts
 =====================================================================
+[Dependency injection]
+- Nest middleware fully supports Dependency Injection. 
+= Nest middleware는 Dependency Injection을 fully supports한다.
+- Just as with providers and controllers, 
+    they are able to inject dependencies 
+    that are available within the same module. 
+= providers 및 controllers와 마찬가지로 same module within(내에)
+    available(사용할 수)있는 dependencies을 inject 할 수 있다.
+- As usual, this is done through the constructor.
+= As usual(평소)처럼, this is constructor를 through(통해) is done(수행)된다.
+=====================================================================
+[Applying middleware]
+- There is no place for middleware in the @Module() decorator. 
+= @Module() decorator에 middleware를 위한 place(자리)는 없다.
+- Instead, we set them up using the configure() method 
+    of the module class. 
+= Instead(대신에), module class의 configure() method를 using해서
+    them(middleware)를 set up한다.
+- Modules that include middleware have to 
+    implement the NestModule interface. 
+= middleware를 포함한 Modules은 NestModule interface를 implement해야 한다.
+- Let's set up the LoggerMiddleware at the AppModule level.
+= AppModule level에서 LoggerMiddleware를 set up 해보자.
+- ex) app.module.ts
+- In the above example we have set up the LoggerMiddleware 
+    for the /cats route handlers 
+    that were previously defined inside the CatsController. 
+= In the above example에서 previously CatsController inside(내부에) 
+    defined된 /cats route handler를 LoggerMiddleware에 set up 했다.
+- We may also further restrict a middleware 
+    to a particular request method 
+    by passing an object containing the route path 
+    and request method to the forRoutes() method 
+    when configuring the middleware. 
+= also(또한) the middleware를 configuring할 때 
+    route path와 request method를 containing한 object를 
+    forRoute() method에 passing해서 특정 request method를
+    middleware에 restrict(제한)할 수 있다.
+- In the example below, 
+    notice that we import the RequestMethod enum 
+    to reference the desired request method type.
+= In the example below(아래 예에서),
+    desired(원하는) request method type을 reference(참조)하기 위해
+    RequestMehod enum을 import하는 것을 notice합니다.
+- ex) app.module.ts
+- HINT
+    The configure() method can be made asynchronous 
+        using async/await 
+        (e.g., you can await completion of an asynchronous operation 
+        inside the configure() method body).
+- 힌트
+    configure() method는 async/await를 using해서 asynchronous으로 
+        만들 수 있다. 
+        (예로, configure() method body inside에 
+            asynchronous operation을 완료될 때까지 await(기다)릴 수 있다.)
+- WARNING
+    When using the express adapter, 
+        the NestJS app will register json and urlencoded 
+        from the package body-parser by default. 
+    This means if you want to customize that middleware 
+        via the MiddlewareConsumer, 
+        you need to turn off the global middleware 
+        by setting the bodyParser flag to false 
+        when creating the application with NestFactory.create().
+= 경고
+    express adapter를 using할 때, NestJS app은 by default로
+        package body-parser에 json과 urlencoded를 register(등록)합니다.
+    that middleware를 MiddlewareConsumer를 통해 customize하려면,
+        application을 NestFactory.create()로 creating할 때,
+        bodyParser flag를 false로 setting해서 global middleware를
+        turn off야 한다는 걸 의미한다.
+=====================================================================
