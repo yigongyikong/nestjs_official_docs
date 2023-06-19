@@ -134,3 +134,61 @@ https://docs.nestjs.com/middleware
         bodyParser flag를 false로 setting해서 global middleware를
         turn off야 한다는 걸 의미한다.
 =====================================================================
+[Route wildcards]
+- Pattern based routes are supported as well. 
+= Pattern based routes도 as well(역시) supported(지원)된다.
+- For instance, the asterisk is used as a wildcard, 
+    and will match any combination of characters:
+= 예를 들어, asterisk는 wildcard로써 used되고 combination of characters와
+    match(일치)하는 것들이다.
+- ex)
+    forRoutes({ path: 'ab*cd', method: RequestMethod.ALL });
+- The 'ab*cd' route path will match abcd, ab_cd, abecd, and so on. 
+= 'ab*cd' route path는 abcd, ab_cd, abecd, 등등과 match한다. 
+- The characters ?, +, *, and () may be used in a route path, 
+    and are subsets of their regular expression counterparts. 
+=  ?, +, *, () 같은 characters는 route path에서 used될 수 있고
+    regular express(정규 표현식에) counterparts(대응하는) subsets이다.
+- The hyphen (-) and the dot (.) are interpreted literally 
+    by string-based paths.
+= The hyphen (-) and the dot (.)은 literally(문자 그대로)
+    string-based paths로 interpreted(해석)된다.
+- WARNING
+    The fastify package uses the latest version 
+        of the path-to-regexp package, 
+        which no longer supports wildcard asterisks *. 
+    Instead, you must use parameters (e.g., (.*), :splat*).
+= 경고
+    fastify package는 no longer(더 이상) wildcard asterisk *를 
+        supports하지 않고, 최신 버전의 path-to-regexp package를 사용한다.
+=====================================================================
+[Middleware consumer]
+- The MiddlewareConsumer is a helper class. 
+= MiddlewareConsumer는 helper class이다.
+- It provides several built-in methods to manage middleware. 
+= It(Mid~Con~)는 middleware를 manage하기 위해 
+    several built-in methods를 provide한다.
+- All of them can be simply chained in the fluent style. 
+= them(Mid~Con~)의 전부는 fluent(유창한) style로 
+    simply(간단하게) chained(연결)되어 있다.
+- The forRoutes() method can take a single string, multiple strings, 
+    a RouteInfo object, a controller class 
+    and even multiple controller classes. 
+= forRoutes() method는 single string, multiple strings, 
+    RouteInfo object, controller classes 
+    그리고 even(심지어) multiple controller classes를 take(사용)할 수 있다.
+- In most cases you'll probably just pass a list of controllers 
+    separated by commas. 
+= In most cases(대부분의 경우) commas(쉼표)로 separated(구분된)
+    list of controller(컨트롤러 목록)을 pass할 것이다.
+- Below is an example with a single controller:
+= Below는 a single controller의 example이다.
+- ex) app.module.ts
+- HINT
+    The apply() method may either take a single middleware, 
+        or multiple arguments to specify multiple middlewares(link).
+        !link : https://docs.nestjs.com/middleware#multiple-middleware!
+= 힌트
+    apply() method는 single middleware 또는 multiple arguments(인수)를
+        take(사용)해서 multiple middleware를 specify할 수 있다.
+=====================================================================
