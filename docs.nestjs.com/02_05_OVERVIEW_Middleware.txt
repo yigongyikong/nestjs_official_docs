@@ -255,3 +255,34 @@ https://docs.nestjs.com/middleware
         simpler functional middleware alternative(대안)을 using할 것을
         Consider해라.    
 =====================================================================
+[Multiple middleware]
+- As mentioned above, in order to bind multiple middleware 
+    that are executed sequentially, 
+    simply provide a comma separated list inside the apply() method:
+= As mentioned above, sequentially(순차적)으로 executed(실행)되는
+    multiple middleware를 bind하기 위해서,
+    apply() method 내부에 comma로 separated된 list를 단순히 provide하면 된다.
+- ex)
+    consumer.apply(cors(), helmet(), logger).forRoutes(CatsController);
+=====================================================================
+[Global middleware]
+- If we want to bind middleware to every registered route at once, 
+    we can use the use() method that is supplied 
+    by the INestApplication instance:
+= every registered route는 at once(한번에) middleware를 bind하고 싶다면,
+    INestApplication instance로 supplied(제공)되는 
+    use() method를 사용할 수 있다.
+- ex) main.ts
+- HINT
+    Accessing the DI container in a global middleware is not possible. 
+    You can use a functional middleware instead when using app.use(). 
+    Alternatively, you can use a class middleware and consume it 
+        with .forRoutes('*') within the AppModule 
+        (or any other module).
+= 힌트
+    global middleware에서 DI container에 Accessing하는 것은 불가능하다.
+    app.use()를 using할 때 대신 functional middleware를 use할 수 있다.
+    Alternatively(대신에), class middleware를 사용할 수 있고
+        it(cla~ mid~)를 AppModule내에서(또는 any other module) 
+        .forRoutes('*')로 consume(사용)할 수 있다.
+=====================================================================
