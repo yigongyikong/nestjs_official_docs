@@ -2,8 +2,9 @@ import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/c
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CatsModule } from './cats/cats.module';
-import { LoggerMiddleware } from './common/middleware/logger.middleware';
+// import { LoggerMiddleware } from './common/middleware/logger.middleware';
 import { CatsController } from './cats/cats.controller';
+import { logger } from './common/middleware/logger.middleware';
 
 @Module({
   imports: [CatsModule],
@@ -13,7 +14,8 @@ import { CatsController } from './cats/cats.controller';
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
-      .apply(LoggerMiddleware)
+      // .apply(LoggerMiddleware)
+      .apply(logger)
       // .forRoutes('cats');
       // .forRoutes({ path: 'cats', method: RequestMethod.GET });
       .forRoutes(CatsController);

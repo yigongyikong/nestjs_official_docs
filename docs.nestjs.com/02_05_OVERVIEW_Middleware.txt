@@ -192,3 +192,66 @@ https://docs.nestjs.com/middleware
     apply() method는 single middleware 또는 multiple arguments(인수)를
         take(사용)해서 multiple middleware를 specify할 수 있다.
 =====================================================================
+[Excluding routes]
+- At times we want to exclude certain routes 
+    from having the middleware applied. 
+= middleware가 applied되지 않도록 certain routes를 exclude하려는 
+    At times(때)가 있다.
+- We can easily exclude certain routes with the exclude() method. 
+= exclude() method로 certain routes를 easily exclude할 수 있다.
+- This method can take a single string, multiple strings, 
+    or a RouteInfo object identifying routes to be excluded, 
+    as shown below:
+= This method는 single string, multiple strings 또는 
+    below shown처럼 excluded(제외)할 routes를 identifying하는
+    RouteInfo object를 사용할 수 있다.
+- ex)
+    consumer
+        .apply(LoggerMiddleware)
+        .exclude(
+            { path: 'cats', method: RequestMethod.GET },
+            { path: 'cats', method: RequestMethod.POST },
+            'cats/(.*)',
+        )
+        .forRoutes(CatsController);
+- HINT
+    The exclude() method supports wildcard parameters 
+        using the path-to-regexp package.
+= 힌트
+    exclude() method는 path-to-regexp package를 using해서 
+        wildcard parameters를 지원한다.
+- With the example above, 
+    LoggerMiddleware will be bound to all routes defined 
+    inside CatsController except the three passed 
+    to the exclude() method.
+= above example에서, LoggerMiddleware는 exclude() method에 passed(전달)된
+    the three(세가지) 경로를 except(제외)하고 CatsController 내부에 defined된
+    all routes를 모두 bound하게 된다.
+=====================================================================
+[Functional middleware]
+- The LoggerMiddleware class we've been using is quite simple. 
+= we가 using한 LoggerMiddleware class는 quite simple하다.
+- It has no members, no additional methods, and no dependencies. 
+= members, additional method, dependencies가 없다.
+- Why can't we just define it in a simple function instead of a class? 
+= class 대신에 simple function로 it(LoggerMiddleware)를 define할 수 없을까?
+- In fact, we can. 
+= 사실, 그렇다.
+- This type of middleware is called functional middleware. 
+= This type의 middleware는 functional middleware로 불린다.
+- Let's transform the logger middleware from class-based 
+    into functional middleware to illustrate the difference:
+= difference를 illustrate(설명)하기 위해 class-based(클래스 기반)에서
+    functional middleware로 transform(변환)해 보자.
+- ex) logger.middleware.ts
+- And use it within the AppModule:
+= 그 다음 AppModule 내에서 사용해보라:
+- ex) app.module.ts
+- HINT
+    Consider using the simpler functional middleware alternative 
+        any time your middleware doesn't need any dependencies.
+= 힌트
+    middleware가 any dependencies도 필요하지 않을 any time에도
+        simpler functional middleware alternative(대안)을 using할 것을
+        Consider해라.    
+=====================================================================
