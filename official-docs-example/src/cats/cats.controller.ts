@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Put, Query, Req } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Put, Query, Req } from '@nestjs/common';
 import { CreateCatDto, UpdateCatDto, ListAllEntities } from './dto/create-cat.dto';
 import { CatsService } from './cats.service';
 import { Cat } from './interfaces/cat.interface';
@@ -37,7 +37,8 @@ export class CatsController {
 
     @Get()
     async findAll() {
-        throw new ForbiddenException();
+        // throw new ForbiddenException();
+        throw new BadRequestException('Something bad happened', { cause: new Error(), description: 'Some error description' });
     }
 
 

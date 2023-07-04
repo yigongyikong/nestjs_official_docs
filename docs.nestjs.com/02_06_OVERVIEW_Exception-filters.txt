@@ -203,8 +203,12 @@ https://docs.nestjs.com/exception-filters
 [Built-in HTTP exceptions]
 - Nest provides a set of standard exceptions that inherit 
     from the base HttpException. 
+= Nest는 base HttpException에서 inherit(상속)되는 
+    a set of standard exceptions를 provides한다.
 - These are exposed from the @nestjs/common package, 
     and represent many of the most common HTTP exceptions:
+= These(위~)는 @nestjs/common package에 exposed되고,
+    the most common HTTP exceptions를 represent(나타낸)다.
     - BadRequestException
     - UnauthorizedException
     - NotFoundException
@@ -227,8 +231,11 @@ https://docs.nestjs.com/exception-filters
     - PreconditionFailedException
 - All the built-in exceptions can also provide both an error cause 
     and an error description using the options parameter:
+= All the built-in exceptions는 options parameter를 using하는
+    error description과 error cause를 both provide할 수 있다.
 - ex) throw new BadRequestException('Something bad happened', { cause: new Error(), description: 'Some error description' })
 - Using the above, this is how the response would look:
+= above(위 ex)를 사용해서, 아래와 같은 response가 표시된다.
 - ex)
     {
         "message": "Something bad happened",
