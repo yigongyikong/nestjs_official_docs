@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, 
 import { CreateCatDto, UpdateCatDto, ListAllEntities } from './dto/create-cat.dto';
 import { CatsService } from './cats.service';
 import { Cat } from './interfaces/cat.interface';
+import { ForbiddenException } from './forbidden.exception';
 
 @Controller('cats')
 export class CatsController {
@@ -19,19 +20,26 @@ export class CatsController {
     //     throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
     // }
 
+    // @Get()
+    // async findAll() {
+    //     try {
+    //         await this.catsService.findAll();
+    //     } catch (error) {
+    //         throw new HttpException({
+    //             status: HttpStatus.FORBIDDEN,
+    //             error: 'This is a custom message',
+    //         }, HttpStatus.FORBIDDEN, {
+    //             cause: error
+    //         });
+    //     }
+    // }
+
+
     @Get()
     async findAll() {
-        try {
-            await this.catsService.findAll();
-        } catch (error) {
-            throw new HttpException({
-                status: HttpStatus.FORBIDDEN,
-                error: 'This is a custom message',
-            }, HttpStatus.FORBIDDEN, {
-                cause: error
-            });
-        }
+        throw new ForbiddenException();
     }
+
 
     /*
     @Post()
