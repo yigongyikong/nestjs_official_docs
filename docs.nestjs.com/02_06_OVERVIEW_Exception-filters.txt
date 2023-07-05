@@ -247,20 +247,37 @@ https://docs.nestjs.com/exception-filters
 - While the base (built-in) exception filter can automatically 
     handle many cases for you, you may want full control over 
     the exceptions layer. 
+= the base (built-in) exception filter가 자동적으로 many cases를
+    handle할 수 있지만, the exception layer over(에 대한) full control을
+    원할 수 있다.
 - For example, you may want to add logging or use a different JSON 
     schema based on some dynamic factors. 
+= 예를 들어, logging을 add하거나 some dynamic factors에 based on한
+    different JSON schema를 사용할 수 있다.
 - Exception filters are designed for exactly this purpose. 
+= Exception filters는 exactly(바로) this purpose을 위해 designed(설계)되었다.
 - They let you control the exact flow of control and the content of 
     the response sent back to the client.
+= They(위~)는 the exact flow of control과 client로 sent back되는
+    the response의 the content를 control하게 한다.
 - Let's create an exception filter that is responsible for 
     catching exceptions which are an instance of the HttpException 
     class, and implementing custom response logic for them. 
+= the HttpException class의 an instance인 exceptions를 catching(포착)하고,
+    for them(이에 대한) custom response를 implementing하는 
+    exception filter를 생성한다.
 - To do this, we'll need to access the underlying platform Request 
     and Response objects. 
+= this(위~)같이 하려면, underlying(기본) platform Request과 Response objects에
+    access해야 할 필요가 있다.
 - We'll access the Request object so we can pull out the original url 
     and include that in the logging information. 
+= the Request object에 access해서 original url을 pull out(추출)하고
+    logging information에 include할 수 있다.
 - We'll use the Response object to take direct control of 
     the response that is sent, using the response.json() method.
+= response.json() method를 using해서, is sent되는 the response을
+    direct control하기 위해 Response object를 사용할 것이다.
 - ex) http-exception.filter.ts
     import { ExceptionFilter, Catch, ArgumentsHost, HttpException } from '@nestjs/common';
     import { Request, Response } from 'express';
@@ -285,20 +302,39 @@ https://docs.nestjs.com/exception-filters
 - HINT
     All exception filters should implement the generic 
         ExceptionFilter<T> interface. 
-    This requires you to provide the catch
-        (exception: T, host: ArgumentsHost) method with its indicated 
-        signature. T indicates the type of the exception.
+    This requires you to provide the catch (exception: T, 
+        host: ArgumentsHost) method with its indicated signature. 
+    T indicates the type of the exception.
+= 힌트
+    All exception filters는 the generic ExceptionFilter<T> interface를
+        implement해야 한다.
+    This(이렇게 하려면) indicated된 signature과 함께 
+        "catch(exception: T, host: ArgumentsHost)" method를 
+        provide할 필요가 있다.
+    T는 the exception의 type을 indicates(나타)낸다.
 - WARNING
     If you are using @nestjs/platform-fastify you can use 
         response.send() instead of response.json(). 
     Don't forget to import the correct types from fastify.
+= 경고
+    @nestjs/platform-fastify를 using하는 경우 response.json() 대신
+        response.send()를 사용할 수 있다.
+    fastify에서 correct types를 import하는 것을 잊지마라.
 - The @Catch(HttpException) decorator binds the required metadata 
     to the exception filter, telling Nest that this particular filter 
-    is looking for exceptions of type HttpException and nothing else. 
+    is looking for exceptions of type HttpException and nothing else.
+= @Catch(HttpException) decorator는 required한 metadata를
+    exception filter에 binds하여 Nest에 this particular filter가
+    type HttpException and nothing else(HttpException 유형의)
+    exception만 찾고 있음을 telling한다.
 - The @Catch() decorator may take a single parameter, 
     or a comma-separated list. 
+= The @Catch() decorator는 single parameter 또는 comma-separated list을
+    사용할 수 있다.
 - This lets you set up the filter for several types of exceptions 
     at once.
+= This(이를 통해) at once(한번에) several types의 exception에 대한
+    filter를 set up 하게 할 수 있다.
 =====================================================================
 [Arguments host]
 - Let's look at the parameters of the catch() method. 
