@@ -338,30 +338,52 @@ https://docs.nestjs.com/exception-filters
 =====================================================================
 [Arguments host]
 - Let's look at the parameters of the catch() method. 
+= catch() method의 parameters를 살펴보자.
 - The exception parameter is the exception object currently 
     being processed. 
+= The exception parameter는 현재 being processed(처리 중)인
+    the exception object이다.
 - The host parameter is an ArgumentsHost object. 
+= The host parameter는 ArgumentsHost object다.
 - ArgumentsHost is a powerful utility object that we'll examine 
-    further in the execution context chapter*. 
+    further in the execution context chapter*.
+= ArgumentsHost는 "execution context chapter"에서 further(더) examine할
+    powerful utility object이다.
 - In this code sample, we use it to obtain a reference to 
     the Request and Response objects that are being passed to 
     the original request handler (in the controller where 
     the exception originates). 
+= In this code sample에서, (exception이 originates할 controller에서)
+    original request handler로 being passed되는 Request와 Response에 대한
+    reference를 obtain(얻는) 데 사용한다.
 - In this code sample, we've used some helper methods 
     on ArgumentsHost to get the desired Request and Response objects. 
+= In this code sample에서, ArgumentsHost상의 some helper methods를 사용해서 
+    desired(원하)는 Request와 Response objects를 얻는다.
 - Learn more about ArgumentsHost here.
+= here ArgumentsHost에 대한 자세한 내용이다.
+    !here: https://docs.nestjs.com/fundamentals/execution-context!
 - *The reason for this level of abstraction is that ArgumentsHost 
     functions in all contexts (e.g., the HTTP server context 
-    we're working with now, but also Microservices and WebSockets). 
+    we're working with now, but also Microservices and WebSockets).
+= this level의 abstraction하는 The reason은 all contexts 
+    (예, 우리가 now working with하고 있는 the HTTP server context 뿐만 아니라,
+    Microservices와 WebSockets)에 ArgumentsHost functions이 해당하기 때문이다.
 - In the execution context chapter we'll see how we can access 
     the appropriate underlying arguments for any execution 
     context with the power of ArgumentsHost and its helper functions. 
+= the execution context chapter에서 우리는 ArgumentsHost에 대한 power(권한)을
+    가진 any execution context에 대해 the appropriate(적절한) 
+    underlying(기본) arguments(인수)와 its(??) helper functions에 
+    어떻게 access할수 있는지 see(알게)될 것이다.
 - This will allow us to write generic exception filters 
     that operate across all contexts.
 =====================================================================
 [Binding filters]
 - Let's tie our new HttpExceptionFilter to the CatsController's 
     create() method.
+= new HttpExceptionFilter을 CatsController의 create() method에
+    tie(연결)합시다.
 - ex) cats.controller.ts
     @Post()
     @UseFilters(new HttpExceptionFilter())
@@ -370,14 +392,23 @@ https://docs.nestjs.com/exception-filters
     }
 - HINT
     The @UseFilters() decorator is imported 
-        from the @nestjs/common package.
+        from the @nestjs/common package.        
+= 힌트
+    @UseFilter() decorator를 @nestjs/common package에서 가져온다.
 - We have used the @UseFilters() decorator here. 
+= here에서 @UseFilters() decorator를 사용했다.
 - Similar to the @Catch() decorator, it can take a single filter 
     instance, or a comma-separated list of filter instances. 
+= @Catch() decorator와 마찬가지로, a single filter instance 또는 
+    comma-separated(쉼표로 구분된) list of filter instances를 사용할 수 있다.
 - Here, we created the instance of HttpExceptionFilter in place.
+= Here, in place의 HttpExceptionFilter의 instance를 만들었다.
 - Alternatively, you may pass the class (instead of an instance), 
     leaving responsibility for instantiation to the framework, 
     and enabling dependency injection.
+= Alternatively(대안으로), (an instance 대신) class를 pass하고 
+    instantiation에 대한 responsibility(책임)은 framework에 leaving하고,
+    dependency injection을 enabling(활성화)할 수 있다.
 - ex) cats.controller.ts
     @Post()
     @UseFilters(HttpExceptionFilter)
@@ -389,18 +420,32 @@ https://docs.nestjs.com/exception-filters
         when possible. 
     It reduces memory usage since Nest can easily reuse instances of 
         the same class across your entire module.
+= 힌트
+    when possible한 instances(경우) 대신에 classes를 사용해서 filters를
+        applying하는게 좋다.
+    Nest는 your entire module에서 the same class의 instances를
+        easily(쉽게) reuse할 수 있어서 memory usage이 reduces한다.
 - In the example above, the HttpExceptionFilter is applied only 
-    to the single create() route handler, making it method-scoped. 
+    to the single create() route handler, making it method-scoped.
+= 위 예제에서, the HttpExceptionFilter는 the single create() route
+    handler에만 applied되고, method-scoped가 생성된다.
 - Exception filters can be scoped at different levels: 
-    method-scoped, controller-scoped, or global-scoped. 
+    method-scoped, controller-scoped, or global-scoped.
+= Exception filters는 method-scoped, controller-scoped, 
+    또는 global-scoped와 같은 different levels에서 be scoped될 수 있다.
 - For example, to set up a filter as controller-scoped, 
     you would do the following:
+= 예를 들어, filter를 controller-scoped로 set up하려면,
+    the following을 수행한다.
 - ex) cats.controller.ts
     @UseFilters(new HttpExceptionFilter())
     export class CatsController {}
 - This construction sets up the HttpExceptionFilter 
     for every route handler defined inside the CatsController.
+= This construction(구성)은 CatsController에 defined된
+    every route handler에 대해 sets up한다.
 - To create a global-scoped filter, you would do the following:
+= global-scoped filter를 create하려면, following을 수행한다.
 - ex) main.ts
     async function bootstrap() {
         const app = await NestFactory.create(AppModule);
@@ -411,14 +456,25 @@ https://docs.nestjs.com/exception-filters
 - WARNING
     The useGlobalFilters() method does not set up filters 
         for gateways or hybrid applications.
+= 경고
+    useGlobalFilters() method는 gateways 또는 hybrid applications에 대한
+        filters를 set up하지 않는다.
 - Global-scoped filters are used across the whole application, 
     for every controller and every route handler. 
+= Global-scoped filters는 every controller와 every route handler에 대해,
+    the whole application에 across되어 are used된다.
 - In terms of dependency injection, global filters registered 
     from outside of any module (with useGlobalFilters() 
     as in the example above) cannot inject dependencies 
     since this is done outside the context of any module. 
+= dependency injection 측면에서, (위 예제에서처럼 useGlobalFilters()로 된)
+    any module의 outside에서 registered된 global filters는 any module의
+    context outside(외부에서) is done(수행되기) 때문에 dependencies를
+    inject할 수 없다.
 - In order to solve this issue, you can register a global-scoped 
     filter directly from any module using the following construction:
+= this issue를 solve하기 위해서, following construction을 using해서
+    any module에서 directly global-scoped filter를 register할 수 있다.
 - ex) app.module.ts
     import { Module } from '@nestjs/common';
     import { APP_FILTER } from '@nestjs/core';
@@ -436,12 +492,28 @@ https://docs.nestjs.com/exception-filters
     When using this approach to perform dependency injection for 
         the filter, note that regardless of the module where 
         this construction is employed, the filter is, in fact, global. 
-    Where should this be done? Choose the module where the filter 
+    Where should this be done? 
+    Choose the module where the filter 
         (HttpExceptionFilter in the example above) is defined. 
-    Also, useClass is not the only way of dealing with custom provider 
-        registration. Learn more here.
+    Also, useClass is not the only way of dealing with 
+        custom provider registration. 
+    Learn more here.
+= 힌트
+    this approach을 using하여 the filter에 대한 dependency injection을
+        perform할때, this construction(구조)가 is employed(사용)되는
+        the module과 무관하게, the filter는, 실제로, global이라는 점을
+        note(유의)하라.
+    Where에서 this(위~?)이 써야하나?
+    filter(HttpExceptionFilter는 위 example에서)가 defined된
+        module을 선택한다.
+    또한, useClass는 custom provider registration을 dealing with하는
+        only way가 아니다.
+    here에서 더 알아보라.
+        (here: https://docs.nestjs.com/fundamentals/custom-providers)
 - You can add as many filters with this technique as needed; 
     simply add each to the providers array.
+= this technique으로 as needed한 만큼 many filters를 add 할 수 있다;
+    단순히 providers array를 add하면 된다.
 =====================================================================
 [Catch everything]
 - In order to catch every unhandled exception (regardless of 
