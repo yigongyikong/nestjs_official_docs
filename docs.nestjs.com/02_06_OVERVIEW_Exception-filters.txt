@@ -1,7 +1,7 @@
 =====================================================================
 https://docs.nestjs.com/exception-filters
 =====================================================================
-[Exception filters]
+[Exception filters-1]
 - Nest comes with a built-in exceptions layer which is responsible for
     processing all unhandled exceptions across an application.
 = Nest는 an application across(전체)에서 unhandled(처리되지 않은) exceptions을
@@ -243,7 +243,7 @@ https://docs.nestjs.com/exception-filters
         "statusCode": 400,
     }
 =====================================================================
-[Exception filters]
+[Exception filters-2]
 - While the base (built-in) exception filter can automatically 
     handle many cases for you, you may want full control over 
     the exceptions layer. 
@@ -519,10 +519,16 @@ https://docs.nestjs.com/exception-filters
 - In order to catch every unhandled exception (regardless of 
     the exception type), leave the @Catch() decorator's parameter 
     list empty, e.g., @Catch().
+= every unhandled exception을 catch하기 위해서(the exceptin type과 무관하게)
+    the @Catch() decorator's의 parameter list를 empty로 leave(남겨)둔다,
+    예, @Catch().
 - In the example below we have a code that is platform-agnostic 
     because it uses the HTTP adapter to deliver the response, 
     and doesn't use any of the platform-specific objects 
     (Request and Response) directly:
+= below example에서 the HTTP adapter를 uses해서 response를 deliver하고 
+    platform-specific objects(Request & Response)를 directly(직접)
+    use하지 않기 때문에 platform-agnostic(구애받지 않은) code가 있다.
 - ex)
     import {
         ExceptionFilter,
@@ -563,6 +569,11 @@ https://docs.nestjs.com/exception-filters
         with a filter that is bound to a specific type, 
         the "Catch anything" filter should be declared first 
         to allow the specific filter to correctly handle the bound type.
+= 경고
+    everything을 catches하는 exception filter를 specific type에 bound된
+        filter와 combining(결합)할 때, specific filter가 bound type을
+        correctly handle하도록 "Catch anything" filter를 
+        first declared해야 한다.
 =====================================================================
 [Inheritance]
 - Typically, you'll create fully customized exception filters 
