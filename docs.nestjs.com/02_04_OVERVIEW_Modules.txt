@@ -181,8 +181,8 @@ https://docs.nestjs.com/modules
     (예시, configuration(구성) 목적용)
 - ex) cats.module.ts
 - However, module classes themselves cannot be injected 
-    as providers due to circular dependency(below link).
-        !https://docs.nestjs.com/fundamentals/circular-dependency!
+    as providers due to circular dependency(link).
+!link : https://docs.nestjs.com/fundamentals/circular-dependency!
 = However(하지만), module classes는 themselves(그 자체)는 
     circular dependency(순환 종속성)으로 due to(인한) providers로
     inject할 수 없다.
@@ -254,8 +254,8 @@ https://docs.nestjs.com/modules
 = 이 feature은 dynamically으로 providers를 register 및 configure할수 있는 
     customizable module을 easily create할 수 있게 할 수 있다.
 - Dynamic modules are covered extensively here. 
-= Dynamic modules은 here(아래 링크)에서 extensively(폭 넒게) covered(다룹)니다.
-    !https://docs.nestjs.com/fundamentals/dynamic-modules!
+= Dynamic modules은 here(link)에서 extensively(폭 넒게) covered(다룹)니다.
+!link : https://docs.nestjs.com/fundamentals/dynamic-modules!
 - In this chapter, 
     we'll give a brief overview to complete the introduction to modules.
 = 이번 장에서, modules에 대해 introduction를 complete하는 
@@ -354,13 +354,13 @@ https://docs.nestjs.com/modules
 = Dynamic modules(link1) chapter는 this topic(이 주제)에 대해 
     greater(훨씬 더) detail(자세하)게 cover(다루)고,
     working(동작)하는 example(예제)(link2)를 include한다.
-    !link1 : https://docs.nestjs.com/fundamentals/dynamic-modules!
-    !link2 : https://github.com/nestjs/nest/tree/master/sample/25-dynamic-modules!
+!link1 : https://docs.nestjs.com/fundamentals/dynamic-modules!
+!link2 : https://github.com/nestjs/nest/tree/master/sample/25-dynamic-modules!
 - HINT
     Learn how to build highly customizable dynamic modules 
         with the use of ConfigurableModuleBuilder here(link) 
         in this chapter.
-    !https://docs.nestjs.com/fundamentals/dynamic-modules#configurable-module-builder!
+!link : https://docs.nestjs.com/fundamentals/dynamic-modules#configurable-module-builder!
 = 힌트
     in this chapter에서 ConfigurableModuleBuilder를 with the use(사용하여) 
         highly(고도로) customizable된 dynamic modules을 build하는지 배워보라.

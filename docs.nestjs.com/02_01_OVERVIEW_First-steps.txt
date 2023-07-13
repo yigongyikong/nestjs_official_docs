@@ -25,9 +25,9 @@ https://docs.nestjs.com/first-steps
     so to use it with vanilla JavaScript we need a Babel compiler.
 = Nest는 latest language features을 이용하고 그러기 위해서, 
     vanilla JavaScript와 함께 사용하려면 Babel compiler가 필요하다.
-    !Babel compiler : 주로 ECMAScript 2015+ 코드를 호환가능한 
+    !Babel compiler(link) : 주로 ECMAScript 2015+ 코드를 호환가능한 
         하위 버전으로 전환!
-        !https://babeljs.io/docs/!
+!link : https://babeljs.io/docs/!
 - We'll mostly use TypeScript in the examples we provide, 
     but you can always switch the code snippets 
     to vanilla JavaScript syntax 
@@ -87,8 +87,8 @@ ex) - $ npm i -g @nestjs/cli
 - The main.ts includes an async function, 
     which will bootstrap our application:
 = main.ts는 application을 bootstrap할 async function을 포함한다.:
-    !bootstrap : 프로그램 로딩 및 실행!
-        !https://www.techtarget.com/whatis/definition/bootstrap!
+    !bootstrap(link) : 프로그램 로딩 및 실행!
+!link : https://www.techtarget.com/whatis/definition/bootstrap!
 ex) main.ts
 - To create a Nest application instance, 
     we use the core NestFactory class. 
@@ -167,13 +167,12 @@ ex) main.ts
 - platform-fastify :
     Fastify is a high performance and low overhead framework 
         highly focused on providing maximum efficiency and speed. 
-    Read how to use it here.
-        !https://docs.nestjs.com/techniques/performance!
+    Read how to use it here(link).
+!link : https://docs.nestjs.com/techniques/performance!
 = platform-fastify
     Fastify는 maximum efficiency와 speed를 providing하는데 
     highly focused한 high performance와 low overhead framework다.
     아래 링크(here)에 어떻게 사용하는지 확인해보라.
-        !https://docs.nestjs.com/techniques/performance!
 - Whichever platform is used, 
     it exposes its own application interface. 
 = 어떤 platform을 사용하던, own application interface를 노출한다.

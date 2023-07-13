@@ -133,7 +133,7 @@ https://docs.nestjs.com/controllers
         except for POST requests which use 201. 
     We can easily change this behavior 
         by adding the @HttpCode(...) decorator 
-        at a handler-level (see Status codes).
+        at a handler-level (see Status codes(link)).
 = Standard(recommended) :
     this built-in method를 사용하면, 
         resquest handler가 JavaScript object 또는 array을 return할 때,
@@ -147,8 +147,8 @@ https://docs.nestjs.com/controllers
         항상 by default로 200이다.
     @HttpCode(...) decorator를 handler-level에서 adding하여
         this behavior(동작)을 easily change할 수 있다.
-    (Status codes 아래 링크)
-        !https://docs.nestjs.com/controllers#status-code!
+    (Status codes (link))
+!link : https://docs.nestjs.com/controllers#status-code!
 - Library-specific : 
     We can use the library-specific (e.g., Express) response object, 
         which can be injected using the @Res() decorator in the method 
@@ -215,18 +215,18 @@ https://docs.nestjs.com/controllers
     "@types/express" package를 설치해라.
 - The request object represents the HTTP request 
     and has properties for the request query string, 
-    parameters, HTTP headers, and body (read more here). 
+    parameters, HTTP headers, and body (read more here(link)). 
 = request object는 HTTP request를 represents(나타)내고 
     request query string, parameter, HTTP headers, body(상세는 아래 링크)에
     대한 properties를 가진다.
-        !https://expressjs.com/en/api.html#req!
+!link : https://expressjs.com/en/api.html#req!
 - In most cases, it's not necessary to grab these properties manually. 
 = In most cases에 manually(수동으로) these properties(속성)들을
     grap(가져올) necessary(필요)는 없다.
 - We can use dedicated decorators instead, such as @Body() or @Query(), 
     which are available out of the box. 
     !out of the box : 즉시 사용할 수 있는!
-        !https://m.blog.naver.com/yangseungjae/220708695668!
+!link : https://m.blog.naver.com/yangseungjae/220708695668!
 = 대신에 @Body() 또는 @Query() 같이 out of the box(즉시 사용)할 수 있는
     dedicated(전용)한 decorator를 사용할 수 있다.
 - Below is a list of the provided decorators 
@@ -277,12 +277,11 @@ https://docs.nestjs.com/controllers
     해야하고 or(그러지 않으면) HTTP server는 will hang(중단)될 것이다.
 - HINT
     To learn how to create your own custom decorators, 
-    visit this chapter.
+        visit this chapter.
 = 힌트
     your own custom decorators를 create하는 how to를 learn하기 위해서,
-        아래 링크를 visit해라.
-    자신만의 커스텀 데코레이터를 생성하는 방법을 알기 위해서는 이 캡터에서 확인할 수 있다.
-        !https://docs.nestjs.com/custom-decorators!
+        this chapter(link)를 visit해라.
+!link : https://docs.nestjs.com/custom-decorators!
 =====================================================================
 [Resources]
 - Earlier, 
@@ -537,8 +536,8 @@ https://docs.nestjs.com/controllers
     the controller의 request-based lifetime이 desired(원하는) behavior일 수
     있는 edge-cases(극단적인 경우)가 있다.
 - Learn how to control scopes here.
-= here(아래링크)에서 scopes를 control하는 how to를 learn해보자.
-    !https://docs.nestjs.com/support!
+= here(link)에서 scopes를 control하는 how to를 learn해보자.
+!link : https://docs.nestjs.com/support!
 =====================================================================
 [Asynchronicity]
 - We love modern JavaScript and we know 
@@ -548,10 +547,10 @@ https://docs.nestjs.com/controllers
 - That's why Nest supports and works well with async functions.
 = That(위~)이 Nest가 async functions을 supports하고 works well하는 why다.
 - HINT
-    Learn more about async / await feature here
+    Learn more about async / await feature here(link).
 = 힌트
-    here(아래 링크)에서 async / await feature에 대해 learn해보자.
-    !https://kamilmysliwiec.com/typescript-2-1-introduction-async-await!
+    here(link)에서 async / await feature에 대해 learn해보자.
+!link : https://kamilmysliwiec.com/typescript-2-1-introduction-async-await!
 - Every async function has to return a Promise. 
 = Every async function은 Promise를 return 해야한다.
 - This means that you can return a deferred value 
@@ -647,14 +646,14 @@ https://docs.nestjs.com/controllers
         resulting object에서 automatically stripped(제거)된다.
     CreateCatDto 예제에서, whitelist는 name, age, bread properties이다.
     here(아래 링크)에서 자세히 알아보세요.
-        !https://docs.nestjs.com/techniques/validation#stripping-properties!
+!https://docs.nestjs.com/techniques/validation#stripping-properties!
 =====================================================================
 [Handling errors]
 - There's a separate chapter about handling errors 
-    (i.e., working with exceptions) here.
+    (i.e., working with exceptions) here(link).
 = here(아래 링크)에 errors handling(i.e., exceptions 작업)에 대한
     separate(별도)의 chapter가 있다.
-    !https://docs.nestjs.com/exception-filters!
+!link : https://docs.nestjs.com/exception-filters!
 =====================================================================
 [Full resource sample]
 - Below is an example that makes use of several 
@@ -671,14 +670,14 @@ https://docs.nestjs.com/controllers
     that automatically generates all the boilerplate code 
     to help us avoid doing all of this, 
     and make the developer experience much simpler. 
-    Read more about this feature here.
+    Read more about this feature here(link).
 = 힌트
     Nest CLI는 all the boilerplate(상용구) code를 automatically
         generates(생성)하는 generator(schematic(도식))를 provides하여
         all of this(이 모든 작업)을 avoid하고,
         developer가 much simpler(더 간단하게) experience(경험)하게 한다.
     here(아래 링크)에 this feature에 대해 Read해라.
-        !https://docs.nestjs.com/recipes/crud-generator!
+!link : https://docs.nestjs.com/recipes/crud-generator!
 =====================================================================
 [Getting up and running]
 - With the above controller fully defined, 

@@ -360,9 +360,9 @@ https://docs.nestjs.com/exception-filters
     on ArgumentsHost to get the desired Request and Response objects. 
 = In this code sample에서, ArgumentsHost상의 some helper methods를 사용해서 
     desired(원하)는 Request와 Response objects를 얻는다.
-- Learn more about ArgumentsHost here.
+- Learn more about ArgumentsHost here(link).
 = here ArgumentsHost에 대한 자세한 내용이다.
-    !here: https://docs.nestjs.com/fundamentals/execution-context!
+!link : https://docs.nestjs.com/fundamentals/execution-context!
 - *The reason for this level of abstraction is that ArgumentsHost 
     functions in all contexts (e.g., the HTTP server context 
     we're working with now, but also Microservices and WebSockets).
@@ -508,8 +508,8 @@ https://docs.nestjs.com/exception-filters
         module을 선택한다.
     또한, useClass는 custom provider registration을 dealing with하는
         only way가 아니다.
-    here에서 더 알아보라.
-        (here: https://docs.nestjs.com/fundamentals/custom-providers)
+    here(link)에서 더 알아보라.
+!link : https://docs.nestjs.com/fundamentals/custom-providers!
 - You can add as many filters with this technique as needed; 
     simply add each to the providers array.
 = this technique으로 as needed한 만큼 many filters를 add 할 수 있다;
@@ -635,6 +635,7 @@ https://docs.nestjs.com/exception-filters
     }
     bootstrap();
 - The second method is to use the APP_FILTER token as shown here.
-= The second method는 here(LINK)에 shown된 APP_FILTER tokens을
+= The second method는 here(link)에 shown된 APP_FILTER tokens을
     사용하는 것이다.
+!link : https://docs.nestjs.com/support!
 =====================================================================

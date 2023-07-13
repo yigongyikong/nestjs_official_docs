@@ -17,12 +17,12 @@ https://docs.nestjs.com/
     built 되고 fully supports해서 OOP(Object Oriented), 
     FP(Functional Programming), FRP(Functional Reactive Programming) 
     요소들과 결합한다.
-    !OOP : 데이터와 코드를 포함할 수 있는 "객체" 개념을 기반으로 하는 프로그래밍 방식!
-        !https://en.wikipedia.org/wiki/Object-oriented_programming!
-    !FP : 함수를 작성하고, 작성한 함수를 실행시켜 프로그램을 동작시키는 방식!
-        !https://en.wikipedia.org/wiki/Functional_programming!
-    !FRP : 비동기 데이터를 다루는 RP를 사용하여 FP 방식으로 프로그램을 동작시키는 방식!
-        !https://en.wikipedia.org/wiki/Functional_reactive_programming!
+    !OOP(link) : 데이터와 코드를 포함할 수 있는 "객체" 개념을 기반으로 하는 프로그래밍 방식!
+!link : https://en.wikipedia.org/wiki/Object-oriented_programming!
+    !FP(link) : 함수를 작성하고, 작성한 함수를 실행시켜 프로그램을 동작시키는 방식!
+!link : https://en.wikipedia.org/wiki/Functional_programming!
+    !FRP(link) : 비동기 데이터를 다루는 RP를 사용하여 FP 방식으로 프로그램을 동작시키는 방식!
+!link : https://en.wikipedia.org/wiki/Functional_reactive_programming!
 - Under the hood, Nest makes use of robust HTTP Server frameworks 
     like Express (the default) 
     and optionally can be configured to use Fastify as well!
@@ -47,9 +47,9 @@ https://docs.nestjs.com/
 = 최근 몇 년 동안, Node.js 덕분에, 
     JavaScript는 front and backend applications 모두에서 
     web상 "lingua franca(공통어)"가 되었다.
-    !lingua franca : 여러 방면에서 쓰이는 언어로 Reactive concurrency한 특성을
+    !lingua franca(link) : 여러 방면에서 쓰이는 언어로 Reactive concurrency한 특성을
         가지며 주류 언어로 쓰이는 언어(현재 C, C++, Python, TypeScript, Rust 등)
-        !https://www.lf-lang.org/!
+!link : https://www.lf-lang.org/!
 - This has given rise to awesome projects 
     like Angular, React and Vue, which improve developer productivity 
     and enable the creation of fast, testable, 
@@ -63,13 +63,13 @@ https://docs.nestjs.com/
 = 그러나, Node(server-side JavaScript)를 위해 superb(우수한) libraries,
     helpers 그리고 tools가 많이 존재하지만, 그것들 중 어느것도 Architecture라는
     main problem을 해결하지 못했다.
-- Nest provides an out-of-the-box application architecture 
+- Nest provides an out-of-the-box(link) application architecture 
     which allows developers and teams to create highly testable, 
     scalable, loosely coupled, and easily maintainable applications. 
 = Nest는 개발자와 그 팀이 testable, scalable, loosely coupled,
     그리고 easily maintainable한 applications을 
     out_of_the_box(즉시 사용 가능)한 application architecture를 제공한다.
-        !https://en.wikipedia.org/wiki/Out_of_the_box_(feature)!
+!link : https://en.wikipedia.org/wiki/Out_of_the_box_(feature)!
 - The architecture is heavily inspired by Angular.
 = 해당 architecture는 Angular에 heavily inspired 되었다.
 =====================================================================
@@ -81,8 +81,8 @@ https://docs.nestjs.com/
     starter project를 clone할 수 있다. (둘다 동일한 결과를 생성한다.)
 - To scaffold the project with the Nest CLI, 
     run the following commands. 
-    !scaffold : Code generation, Project generation!
-        !https://en.wikipedia.org/wiki/Scaffold_(programming)!
+    !scaffold(link) : Code generation, Project generation!
+!link : https://en.wikipedia.org/wiki/Scaffold_(programming)!
 = Nest CLI로 scaffold 프로젝트를 만들기 위해서, 아래 명령어-ex)를 사용하면 됩니다.
 - This will create a new project directory, 
     and populate the directory with the initial core Nest files 
@@ -131,7 +131,7 @@ ex) - $ git clone https://github.com/nestjs/typescript-starter.git project
     for creating the project boilerplate files yourself.
 = 물론, 이러한 경우에, project boilerplate(상용구) files을 직접
     생성할 책임이 있다.
-    !boilerplate : 여러 곳에서 재사용되며, 반복적으로 비슷한 형태를 띄는 코드!
-        !https://en.wikipedia.org/wiki/Boilerplate_code!
+    !boilerplate(link) : 여러 곳에서 재사용되며, 반복적으로 비슷한 형태를 띄는 코드!
+!link : https://en.wikipedia.org/wiki/Boilerplate_code!
 ex) - $ npm i --save @nestjs/core @nestjs/common rxjs reflect-metadata
 =====================================================================

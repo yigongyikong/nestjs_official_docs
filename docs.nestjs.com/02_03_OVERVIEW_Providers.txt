@@ -34,17 +34,17 @@ https://docs.nestjs.com/providers
 = 힌트
     Nest 더 많은 OO 방식으로 dependencies(종속성)를 design하고
         organize할 수 있는 possibility을 enables(가능하게)하기 때문에,
-        we(우리)는 strongly하게 SOLID principles(원칙)을 
+        we(우리)는 strongly하게 SOLID(link) principles(원칙)을 
         following(따르)길 recommend(권장)한다.
-    !S(Single responsibility principle) : 한 클래스는 하나의 책임만 가진다.
+    S(Single responsibility principle) : 한 클래스는 하나의 책임만 가진다.
     O(Open/closed principle) : 확장에는 열려 있으나 변경에는 닫혀 있어야 한다.
     L(Liskov substitution principle) : 객체는 정확성을 깨뜨리지 않고
         하위 타입의 인스턴스로 바꿀 수 있어야 한다.
     I(Interface segregation principle) : 인터페이스 여러 개가
         범용 인터페이스 하나보다 낫다.
     D(Dependency inversion principle) : 추상화에 의존해야지, 구체화에 의존하면
-        안된다, 의존성 주입이 이 원칙을 따른다.!
-        !https://en.wikipedia.org/wiki/SOLID!
+        안된다, 의존성 주입이 이 원칙을 따른다.
+!link : https://en.wikipedia.org/wiki/SOLID!
 =====================================================================
 [Services]
 - Let's start by creating a simple CatsService. 
@@ -93,12 +93,12 @@ https://docs.nestjs.com/providers
 =====================================================================
 [Dependency injection]
 - Nest is built around the strong design pattern commonly 
-    known as Dependency injection. 
+    known as Dependency injection(link). 
 = Nest는 commonly(일반적으로) Dependency injection(종속성 주입)으로 불리는 
     strong(강력한) design pattern을 around(기반)으로 built(만들어)졌다.
 - We recommend reading a great article about this concept 
     in the official Angular documentation.
-    !https://angular.io/guide/dependency-injection!
+!link : https://angular.io/guide/dependency-injection!
 = official Angular docs~에서 this concept(개념)에 대해 great article을
     reading하는 것을 recommend한다.
 - In Nest, thanks to TypeScript capabilities, 
@@ -117,8 +117,8 @@ https://docs.nestjs.com/providers
     creating하고 returning해서 catsService를 resolve할 것이다
     (or, normal case의 singleton에서, already elsewhere에서
     has been requested된 existing(기존) instance를 returning한다.)
-    !singleton : 객체의 인스턴스가 오직 1개만 생성되는 패턴!
-        !https://tecoble.techcourse.co.kr/post/2020-11-07-singleton/!
+    singleton(link) : 객체의 인스턴스가 오직 1개만 생성되는 패턴
+!link : https://tecoble.techcourse.co.kr/post/2020-11-07-singleton/!
 - This dependency is resolved and passed 
     to your controller's constructor 
     (or assigned to the indicated property):
@@ -144,9 +144,9 @@ https://docs.nestjs.com/providers
 - However, there are ways to make your provider lifetime 
     request-scoped as well. 
 = 그러나, provider의 lifetime을 request-scroped로 만드는 방법 역시 있다.
-- You can read more about these techniques here.
+- You can read more about these techniques here(link).
 = 이러한 기술적 내용은 아래 링크에서 자세히 살펴봐라.
-    !https://docs.nestjs.com/fundamentals/injection-scopes!
+!link : https://docs.nestjs.com/fundamentals/injection-scopes!
 =====================================================================
 [Custom providers]
 - Nest has a built-in inversion of control ("IoC") container 
@@ -166,9 +166,9 @@ https://docs.nestjs.com/providers
 = provider를 define(정의)하는 several(몇 가지) 방식이 있다:
     plane values(일반 값), classes, 
     asynchronous 또는 synchronous factories를 사용할 수 있다.
-- More examples are provided here.
+- More examples are provided here(link).
 = More examples(더 많은 예제들)은 아래 링크에 제공된다.
-    !https://docs.nestjs.com/fundamentals/dependency-injection!
+!link : https://docs.nestjs.com/fundamentals/dependency-injection!
 =====================================================================
 [Optional providers]
 - Occasionally, you might have dependencies 
@@ -201,10 +201,10 @@ https://docs.nestjs.com/providers
     indicating a dependency through a class in the constructor. 
 = Previous example에서 in the constructor에 class를 통해 dependency를
     indicating(나타)하는 constructor-based injection을 보여줬다.
-- Read more about custom providers and their associated tokens here.
+- Read more about custom providers and their associated tokens here(link).
 = custom(사용자 지정) providers 와 associated(관련) tokens에 대한 
     내용은 아래 링크를 보라.
-    !https://docs.nestjs.com/fundamentals/custom-providers!
+!link : https://docs.nestjs.com/fundamentals/custom-providers!
 =====================================================================
 [Property-based injection]
 - The technique we've used so far is called constructor-based injection, 

@@ -17,7 +17,7 @@ https://docs.nestjs.com/middleware
 - Nest middleware are, by default, equivalent to express middleware. 
 = Nest middleware는 by default(기본적)으로, express(link) middleware와 
     equivalent(동일)하다.
-        !link : https://expressjs.com/en/guide/using-middleware.html!
+!link : https://expressjs.com/en/guide/using-middleware.html!
 - The following description from the official express documentation 
     describes the capabilities of middleware:
 = official express documentation의 following description(아래 설명)은
@@ -54,12 +54,12 @@ https://docs.nestjs.com/middleware
     by implementing하는 것으로 start한다.
 - WARNING
     Express and fastify handle middleware differently 
-        and provide different method signatures, read more here. 
-            !https://docs.nestjs.com/techniques/performance#middleware!
+        and provide different method signatures, read more here(link). 
+!link : https://docs.nestjs.com/techniques/performance#middleware!
 = 주의
     Express와 fastify가 middleware를 differently하게 handle(처리)하고
         different method signatures를 provide한다, here(link)를 더 읽어라.
-        !link : https://docs.nestjs.com/techniques/performance#middleware!
+!link : https://docs.nestjs.com/techniques/performance#middleware!
 - ex) logger.middleware.ts
 =====================================================================
 [Dependency injection]
@@ -187,7 +187,7 @@ https://docs.nestjs.com/middleware
 - HINT
     The apply() method may either take a single middleware, 
         or multiple arguments to specify multiple middlewares(link).
-        !link : https://docs.nestjs.com/middleware#multiple-middleware!
+!link : https://docs.nestjs.com/middleware#multiple-middleware!
 = 힌트
     apply() method는 single middleware 또는 multiple arguments(인수)를
         take(사용)해서 multiple middleware를 specify할 수 있다.
